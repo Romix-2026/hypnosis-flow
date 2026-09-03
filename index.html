@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="axYyECrBeHZt3p4pI3U6Tv">
-<head data-page-node-id="dTWK8XQk7n9vM7gbEUy3NG">
-<meta charset="UTF-8" data-page-node-id="phk6KK6CMSfPT3E0HjqEhu">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" data-page-node-id="8vlciD43Ss510o243Yq1d6">
-<meta name="apple-mobile-web-app-capable" content="yes" data-page-node-id="NqAGGuuW5C8yG0zkB2nxFv">
-<meta name="format-detection" content="telephone=no" data-page-node-id="Y3o9GVq24BUcsq8grAITN4">
-<meta name="theme-color" content="#f6f4ef" data-page-node-id="9F9Aa4P27wJmwM1KLxE5LO">
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#f6f4ef">
 <title>催眠流程引导</title>
 <style>
 /* 催眠流程引导 · 样式（移动端优先，纸墨暖色） */
@@ -79,11 +79,34 @@ body {
 
 /* ===== 朗读进度 ===== */
 .voice-bar { flex-shrink: 0; margin-bottom: 14px; }
-.voice-status { display: flex; justify-content: space-between; font-size: 12px; color: #9a938a; margin-bottom: 6px; }
-.voice-status .st { color: #4a6fa5; }
+.voice-status { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #9a938a; margin-bottom: 6px; }
+.voice-status .status-left { display: flex; align-items: center; min-width: 0; }
+.voice-status .st { color: #4a6fa5; white-space: nowrap; }
 .voice-status .st.off { color: #b05a4a; }
 .prog-track { height: 7px; border-radius: 4px; background: #e7e2d8; overflow: hidden; }
 .prog-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #7d9ec7, #4a6fa5); border-radius: 4px; transition: width .3s; }
+
+/* 识别活动指示：圆点呼吸 + 进度条流动，让朗读者直观知道是否在识别 */
+.voice-status .dot {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  background: #cfc8bb; margin-right: 6px; flex-shrink: 0;
+}
+.voice-status .dot.live { background: #5f9e6a; animation: dotPulse 1.4s ease-in-out infinite; }
+.voice-status .dot.idle { background: #d99b7e; }
+@keyframes dotPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .3; transform: scale(.7); } }
+.prog-fill.live {
+  background-color: #4a6fa5;
+  background-image: linear-gradient(90deg, rgba(255,255,255,.26) 25%, rgba(255,255,255,0) 25%,
+    rgba(255,255,255,0) 50%, rgba(255,255,255,.26) 50%,
+    rgba(255,255,255,.26) 75%, rgba(255,255,255,0) 75%);
+  background-size: 18px 18px;
+  animation: progFlow 1s linear infinite;
+}
+@keyframes progFlow { from { background-position: 0 0; } to { background-position: 18px 0; } }
+.voice-heard {
+  font-size: 11px; color: #a8a196; margin-top: 6px; line-height: 1.5;
+  min-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 
 /* ===== 表单 ===== */
 .form-row { margin-bottom: 16px; }
@@ -165,8 +188,8 @@ textarea.csv-fallback {
 
 </style>
 </head>
-<body data-page-node-id="tCPAeofNLhZIkdi0zXXYRz">
-<div id="app" data-page-node-id="2Br56FYLQe5jtr3UloOPGn"></div>
+<body>
+<div id="app"></div>
 <script>
 window.__FLOW__ = {"meta":{"title":"催眠大流程","version":"2026-09-02","source":"催眠大流程-含顺序编号.docx（下划线=朗读稿）"},"voice":{"lang":"zh-CN","threshold":0.85,"silenceMs":3000,"watchdogMs":6000,"restartDelays":[300,1000,2000,3500]},"steps":[{"id":"1","title":"步骤1: 催眠前谈话","blocks":[{"kind":"op","text":"体检报告，排除器质性疾患。"}]},{"id":"1.1","title":"步骤1.1 目标设定（实现时间+具体目标，大目标拆分，先实现第一个小目标）","blocks":[]},{"id":"1.2","title":"步骤1.2 头脑理论（原始区、批判区、意识10%、潜意识90%、整合、内在大智慧、知行合一）","blocks":[{"kind":"op","text":"头脑理论：原始区、批判区、意识10%、潜意识90%、整合、内在大智慧、知行合一。我们有一个模型叫头脑理论，这会帮助你懂得催眠。"}]},{"id":"1.2.1","title":"步骤1.2.1","blocks":[{"kind":"reading","text":"这是人的大脑，人才出生只具有大脑的原始区（Primitive Mind），基本反应是战斗（fight）和逃跑（flight），对吗？"},{"kind":"reading","text":"在出生以后，开始认识这个世界，通过定义（I）联系（A）反应（R）的方式来学习。比如说“巧克力”是个定义，产生的联系是棕色、方形的、扁的、香甜的，反应是喜欢吃，这样就在大脑里有了巧克力的概念，是这样的，对吗？"},{"kind":"reading","text":"大脑是通过你所有的感官摄取信息，开始定义，将这些事情建立联系，并产生反应。定义一件事情，它对你来说就变成一个已知的经验，并且你可以将其联系，进而产生正面或负西的反应，我说清楚了吗？"},{"kind":"reading","text":"从一生下来开始，你就逐一地开始学习什么是你喜欢的，什么是你不喜欢的，你将正面与负面的反应与他们联系起来，是这样的，对吗？这经过了成千上万次的经验积累，最终变成对你是已知的事情，并且开始建立起你的世界模式，这没什么对错之分。"}]},{"id":"1.2.2","title":"步骤1.2.2","blocks":[{"kind":"reading","text":"在8到10岁以后，你的逻辑（L）、分析（A）、决定（D）、意志力（W）的能力更加完善，这部分叫意识区。意识区占大脑功能的10%，下面这部分叫潜意识区，它占了我们脑功能的90%，我说清楚了吗？"}]},{"id":"1.2.3","title":"步骤1.2.3","blocks":[{"kind":"reading","text":"你现在有想法，却迟迟无法行动，这是因为你的意识只占了大脑功能的你前提你的建查记能象许设有行动起来，它总是越向干将你留原来的进悉，明白了，是吗？所以，你想有所改变，一定要发挥潜意识这 90％的力量，这样就会运用到自己100%的能力，我说清楚了吗？"},{"kind":"reading","text":"通过催眠，可以激活你的潜意识A从而升级你潜意识的数据庫，让那些你想要的信念和行为能达到你的潜意识，这就会使你知行合一，轻松地实现你的目标，让一就变得容易，我说清楚了吗？"}]},{"id":"1.3","title":"步骤1.3 暗示感受性测试 手指分开&手臂升降（步骤1.3.1 暗示感受性测试——手指分开（主要是左脑还是右脑接受信息））","blocks":[{"kind":"reading","text":"现在我要对你进行暗示感受性测试。这个测试无所谓通过与否，只是来看你是用左脑还是右脑来接受信息的。所以你不需要刻意配合我或抵抗我，只让它自然而然地发生就好，好吗？ 现在，我会拿起你的手臂（注意，是左手）。"},{"kind":"reading","text":"将你的注意力集中在中指指尖，过一会儿，当我放开你的手臂时，你的手指会自然分开。"},{"kind":"reading","text":"手指在分开，手指间分开的距离越来越大；手指在分开，手指间分开的距离越来越大。好，做得很好。我会拿起你另外一只手臂。好，做得很好。"}]},{"id":"1.3.2","title":"步骤1.3.2暗示感受性测试——手臂升降（想象力和身体的程度如何）","blocks":[{"kind":"reading","text":"下面是一个想象力的测试，测试你的想象力影响身体的程度如何。好，现在双臂向前平伸，就像这样，右手掌心朝上，左手大拇指朝上，好，做得很好。现在好好看一下你的双手，过一会儿我会让你去想象一下，我在你的右手上放了一个很沉重的铅球，同时在你的左手大拇指上系了一个很大的氢气球。你的右手将开始下沉，同时左手飘起得越来越高，两只手的距离越来越大。（两手归位）好吗？好，好好地看一下你双手的样子，然后闭上眼睛。当你在头脑中可以想象出你双手的图像时，就点头答是。好，做得很好。现在你开始想象一下，在你的右手上放了一个很沉重的铅球，同时在你的左手大拇指上系了一个很大的氢气球。侧身一步，继续去想象，铅球的体积在变得越来越大，铅球在变得越来越沉重，同时你的手臂也在开始下沉，开始下沉，手臂在下沉，手臂在下沉，越来越沉，越来越沉。好，现在睁开眼睛看看你的手臂。好，你做得很好。"}]},{"id":"1.4.1","title":"步骤1.4.1暗示感受性问卷量表","blocks":[{"kind":"op","text":"量表：暗示感受性问卷(一)"},{"kind":"op","text":"量表：暗示感受性问卷(二)"}]},{"id":"__q_table-1","title":"暗示感受性问卷（一）","blocks":[],"pseudo":"questionnaire:questionnaire1"},{"id":"__q_table-2","title":"暗示感受性问卷（二）","blocks":[],"pseudo":"questionnaire:questionnaire2"},{"id":"__qresult","title":"暗示感受性结果","blocks":[],"pseudo":"qresult"},{"id":"1.4.2","title":"步骤1.4.2 BDC、BAI量表（焦虑抑郁评分）催眠前、催眠后都要评分。","blocks":[{"kind":"op","text":"伯恩斯 BDC 量表"},{"kind":"op","text":"伯恩斯 BAI 量表"}]},{"id":"__q_bdc-pre","title":"伯恩斯 BDC 量表（催眠前）","blocks":[],"pseudo":"questionnaire:bdcPre"},{"id":"__q_bai-pre","title":"伯恩斯 BAI 量表（催眠前）","blocks":[],"pseudo":"questionnaire:baiPre"},{"id":"__q_suggestibility-check","title":"暗示感受性问题（是 / 否）","blocks":[],"pseudo":"questionnaire:suggestibilityCheck"},{"id":"__state_pre","title":"催眠前：来访者状态记录","blocks":[],"pseudo":"state:pre"},{"id":"2","title":"步骤2: 手臂抬起（传统版本，20分钟）（步骤2.1 调整座椅位置）","blocks":[{"kind":"op","text":"移动座椅，向前或向桌面移动，让来访者在椅子里坐直，双脚平放在地面上，左手手臂平放在桌上。要求来访者取下眼镜，吐掉嘴里的口香糖。"},{"kind":"reading","text":"好，双脚平放在地面上，右手放在大腿上，左手放在桌面上，好，做的很好。现在，我会拿起你的手臂。"}]},{"id":"2.2","title":"步骤 2.2 拿起来访者的手，从桌面到脸部接触三次(边说边做)","blocks":[{"kind":"op","text":"一只手轻触来访者左臂肘部(固定位置)，另一只手两根手指从小指方向插入，接触手心，同时感受来访者手心的温度、是否有汗。"}]},{"id":"2.3","title":"步骤 2.3 说明你将测试其暗示感受性","blocks":[{"kind":"op","text":"（暗示感受性问卷，第一次来访需要做，直视来访双眼，触发原始区战逃反应。让其看着催眠师眉心，来访走神时“看到你目光虚焦了，好做得很好，来，现在看着我的眉心”将其轻轻拉回来）"},{"kind":"reading","text":"过一会儿，我会做一个问卷测试，测试中你不需要用语言回答我，如果答案是“是”，就点头，如果答案是“否”，就摇头，如果你不知道怎么回答，你只需要看着我就好了，好吗?"},{"kind":"reading","text":"好，现在看一眼你的手臂，从肘部到指尖，好好记住这个图像，过一会儿，我会让你闭上眼睛，去想出这个图像。"},{"kind":"reading","text":"好，现在闭上眼睛，在头脑中想象出你的手臂和手的样子。当你能想出它们的样子时，点头告诉我(等待回应)。"}]},{"id":"2.4","title":"步骤 2.4 三个生理变化","blocks":[{"kind":"reading","text":"过一会儿，在你进入催眠状态之前，你的身体上会出现一系列的生理变化，我会指出来告诉你，当你也注意到的时候，点头告诉我说是。"},{"kind":"reading","text":"①现在去注意你的呼吸，你的呼吸变得越来越深，同时你的身体会吸进更多的氧气。当你开始注意到呼吸变得越来越深时，可以点头告诉我说是。(等待回应)好，做得很好!"},{"kind":"reading","text":"②现在去注意你的口后、咽喉、舌头，会开始有些发干的感觉，"},{"kind":"reading","text":"甚至要做一些吞咽的动作。当你注意到的时候，点头告诉我说是。(等待回应) 好，做得很好!"},{"kind":"reading","text":"③现在去注意你的眼睛和眼皮。去体会眼皮变得很沉，眼球会在眼皮下轻轻的转动，当你注意到眼球在眼皮下轻轻转动时，点头告诉我说是。(等待回应)好，做得很好!"}]},{"id":"2.5","title":"步骤 2.5 ：信息加载，导入催眠:观察手臂对不同暗示的反应。（加载20min）","blocks":[{"kind":"reading","text":"现在集中注意力到你的肘部，压在桌面上的这支手臂的肘部，去体会你的肘部压向桌面的压力，同时，上臂的肌肉开始绷紧。过一会儿，在你的手臂和手离开桌面之前，你的手指或是手腕会有肌肉牵动和拉动的感觉，当你感觉到时，可以点头告诉我说是。好，做得很好!"},{"kind":"op","text":"①间接暗示:"},{"kind":"reading","text":"去体会从肘部向前到手指尖会变得越来越轻，越来越轻，像羽毛一样越来越轻地向上飘起，飘高，手臂像羽毛一样轻，越来越轻，越飘越高。(重复3遍)好，做得很好!"},{"kind":"op","text":"②直接暗示:"},{"kind":"reading","text":"去体会仿佛有一股拉力,拉着你的手臂向上抬起、抬高,越来越高，越来越高地向上抬起，抬高，越来越高，不断向上抬起，拉起、抬高，越抬越高。(重复3遍)好，做得很好!"},{"kind":"op","text":"③误导暗示:"},{"kind":"reading","text":"现在，去体会你的身体稳稳地坐在椅子里，你的双脚更沉重地踩在地面上，同时，放在你右腿上的右手也变得更加沉重。"},{"kind":"op","text":"④屏蔽声音:"},{"kind":"reading","text":"你能听到外面所有的声音，外面所有的声音都不会影响到你，都只会让你更加专注在我的声音上，引导你的手臂继续向上抬起、抬高、越抬越高。"},{"kind":"op","text":"⑤结合呼吸:"},{"kind":"reading","text":"现在结合呼吸。随着每一次吸气，你的手臂和手就会继续向上抬起，抬高，越来越高地向上抬起，越来越高，不断向上抬起,向你的面部靠近;随着每一次呼气，你的头也会逐渐低垂，去靠近你的手，头和手之间的距离在越来越近。好，做得很好!"},{"kind":"op","text":"(重复①-⑤，直到手臂抬起至一半高度)"}]},{"id":"2.6","title":"步骤 2.6 如果手臂抬起到一半高度，则完成此步骤，否则跳过","blocks":[{"kind":"op","text":"①翻转手腕:"},{"kind":"reading","text":"过一会儿，去注意你的手腕，你的手腕会开始向内、向上翻转，扭转，掌心朝向面部。不断地翻转、扭转、向内、向上，掌心转向你的面部。仿佛在掌心和面部之间有一股磁力，在相互吸引，将你的手掌拉向你的面部。好，做得很好!"},{"kind":"op","text":"②手触脸导入催眠:"},{"kind":"reading","text":"随着每一次吸气，你的手臂和手就会继续向面部靠近、拉近，越来越近。随着每一次呼气，你的头也会逐渐低垂，去靠近你的手，头和手之间的距离在越来越近。"}]},{"id":"2.7","title":"步骤 2.7 ③界定睡眠","blocks":[{"kind":"reading","text":"过一会儿，（当你的手接触到面部的时候），我会对你说“睡着”两个字，这个“睡着”并不代表像晚上一样睡着，而只是代表你闭着眼睛，身体完全放松的状态。"},{"kind":"op","text":"(重复①-③，三遍)"}]},{"id":"2.8","title":"步骤 2.8 三位一体“睡着”","blocks":[{"kind":"op","text":"（食指和中指点额头，稳稳轻轻地，在额头停留3-5秒，同时打响指，同时说“睡着”。不需要提前告知我要触碰触碰额头）"},{"kind":"op","text":"催眠师说“睡着”、打响指、同时另一只手的食指、中指轻触来访者额头(双眉之间)5秒钟。"},{"kind":"reading","text":"睡着(响指)。"}]},{"id":"2.9","title":"步骤 2.9 “催眠后暗示”。","blocks":[{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在、甚至更深的催眠状态，同时身体完全放松，更深地睡着。好，做得很好!"}]},{"id":"3","title":"步骤 3 ：手臂放落加深（步骤 3.1过一会儿，我会拿起你的手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。）","blocks":[{"kind":"reading","text":"过一会儿，我会拿起你的手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"好，完全放松（拿手），更深地睡着（将手在距离大腿10cm的高度放落到大腿上）。"},{"kind":"reading","text":"睡着！"}]},{"id":"3.2","title":"步骤 3.2 催眠后暗示","blocks":[{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在、甚至更深的催眠状态，同时身体完全放松，更深地睡着。好，做得很好!"}]},{"id":"3.3","title":"步骤 3.3 过一会儿，我会拿起你另外一只手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。","blocks":[{"kind":"reading","text":"过一会儿，我会拿起你另外一只手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"好，完全放松（拿手），更深地睡着（将手在距离大腿10cm的高度放落到大腿上）。"},{"kind":"reading","text":"睡着！"}]},{"id":"3.4","title":"步骤 3.4 催眠后暗示","blocks":[{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在、甚至更深的催眠状态，同时身体完全放松，更深地睡着。好，做得很好!"}]},{"id":"4","title":"步骤 4: 5到0加深","blocks":[{"kind":"op","text":"最常用的加深技术，在后面会讲更多的加深技术。从高到低代表意识和身体都更加放松，进入到更深的催眠状态。0则代表“睡着”的催眠状态。"},{"kind":"op","text":"人的大脑喜欢数字，这样会让一切明确化，产生安全感和可控感。"}]},{"id":"4.1","title":"步骤 4.1过一会儿，我会从5向下数到0，随着我每数一个数字，你都会加倍的放松，当我数到0时，你就会完全的放松，进入到更深的催眠状态，更深地睡着。","blocks":[{"kind":"reading","text":"过一会儿，我会从5向下数到0，随着我每数一个数字，你都会加倍的放松，当我数到0时，你就会完全的放松，进入到更深的催眠状态，更深地睡着。"}]},{"id":"4.2","title":"步骤 4.2 5➡️0","blocks":[{"kind":"reading","text":"5···加倍地放松，"},{"kind":"reading","text":"4···加倍地放松，"},{"kind":"reading","text":"3···加倍地放松，"},{"kind":"reading","text":"2···加倍地放松，"},{"kind":"reading","text":"1···加倍地放松，"},{"kind":"reading","text":"0···更深的睡着（响指）"},{"kind":"reading","text":"（没打响不用在在意，继续）"}]},{"id":"4.3","title":"步骤 4.3（含催眠后暗示）：现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，、至更深的催眠状态，同时身体完全放松，更深地睡着。","blocks":[{"kind":"reading","text":"（含催眠后暗示）：现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，、至更深的催眠状态，同时身体完全放松，更深地睡着。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"5","title":"步骤 5: 0-5唤醒（步骤 5.1好，过一会，我会从0向上数到5，随着我每数一个数字，你都会越来越清醒，当我数到5时，你就会睁开眼睛，完全清醒，感觉头脑清醒，身体轻松舒适。）","blocks":[{"kind":"reading","text":"好，过一会，我会从0向上数到5，随着我每数一个数字，你都会越来越清醒，当我数到5时，你就会睁开眼睛，完全清醒，感觉头脑清醒，身体轻松舒适。"}]},{"id":"5.2","title":"步骤 5.2","blocks":[{"kind":"reading","text":"0，更深地睡着，完全放松。"},{"kind":"reading","text":"1，越来越清醒，"},{"kind":"reading","text":"2，越来越清醒，"},{"kind":"reading","text":"3，当我数到5时，你就会睁开眼睛，完全清醒，"},{"kind":"reading","text":"4，好，做一个深呼吸，吸气，"},{"kind":"reading","text":"5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！"}]},{"id":"5.3","title":"步骤 5.3 如眼睛没睁开，就再重复。","blocks":[{"kind":"reading","text":"1、2、3、4、5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！来，伸个懒腰（双轨沟通）。"},{"kind":"op","text":"坚决唤醒，叫来访大名。"}]},{"id":"6","title":"步骤 6 目光凝视法（传统版本）","blocks":[{"kind":"op","text":"警告：年龄大、眼压高者，禁用。"},{"kind":"op","text":"说明：这是一个传统的催眠诱导技术，可以让来访者达到一个基本的催眠状态。闭上眼睛可以达到感觉剥夺（Sensory Deprivation）的目的，可以增加想像能力和对信息的接收能力，当眼睛闭上后，所有外界的视觉刺激都自动消除了。"},{"kind":"op","text":"语气放松且稳定，你让他放松，你自己首先得放松且稳定。"}]},{"id":"6.1","title":"步骤6.1 现在，将你的注意力集中在水晶球上，当你将注意力集中在水晶球时，开始做三次深呼吸，每一次呼气都加倍的放松下来。","blocks":[{"kind":"reading","text":"现在，将你的注意力集中在水晶球上，当你将注意力集中在水晶球时，开始做三次深呼吸，每一次呼气都加倍的放松下来。"}]},{"id":"6.2","title":"步骤6.2 来1: 加倍的放松；","blocks":[{"kind":"reading","text":"加倍的放松；"},{"kind":"reading","text":"加倍的放松。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"6.3","title":"步骤6.3现在，将你的注意力集中在水晶球的同时，去注意你的眼睛。你的眼睛在眨动，随着你的眼睛在眨动，你的眼皮开始变得越来越沉重。眼皮越来越沉重，眼睛眨动的次数也越来越多；眼睛眨动的次数越来越多，眼皮就越来越沉重。","blocks":[{"kind":"reading","text":"现在，将你的注意力集中在水晶球的同时，去注意你的眼睛。你的眼睛在眨动，随着你的眼睛在眨动，你的眼皮开始变得越来越沉重。眼皮越来越沉重，眼睛眨动的次数也越来越多；眼睛眨动的次数越来越多，眼皮就越来越沉重。"}]},{"id":"6.4","title":"步骤6.4过一会儿，你就可以让自己闭上眼睛（现在允许自己闭上眼睛），当你闭上眼睛的时候，你就可以进入到更深的催眠状态，更深地睡着！越来越沉，越来越沉，更深地睡着！","blocks":[{"kind":"reading","text":"过一会儿，你就可以让自己闭上眼睛（现在允许自己闭上眼睛），当你闭上眼睛的时候，你就可以进入到更深的催眠状态，更深地睡着！越来越沉，越来越沉，更深地睡着！"},{"kind":"reading","text":"睡着（响指）。"}]},{"id":"6.5","title":"步骤6.5（接催眠后暗示）：现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，、至更深的催眠状态，同时身体完全放松，更深地睡着。","blocks":[{"kind":"reading","text":"（接催眠后暗示）：现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，、至更深的催眠状态，同时身体完全放松，更深地睡着。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"7","title":"步骤7 渐进式放松技术：引导词","blocks":[{"kind":"op","text":"注意：①语速稍快一点，不要拖沓，别把人哄睡着。②不要擅自加内容：光、宗教等，大师面前不要班门弄斧。"}]},{"id":"7.1","title":"步骤 7.1 现在，将你的注意力放到你的双脚上，去体会从你的脚趾、脚背、到脚跟完全地放松，随着每一次呼吸，身体更深地放松，内心更加平静。","blocks":[{"kind":"reading","text":"现在，将你的注意力放到你的双脚上，去体会从你的脚趾、脚背、到脚跟完全地放松，随着每一次呼吸，身体更深地放松，内心更加平静。"},{"kind":"reading","text":"这股放松的感觉在向上走，到达你的小腿，小腿的肌肉在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。"},{"kind":"reading","text":"放松的感觉继续向上走，透过膝盖，到达你的大腿，大腿的肌肉在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。你能够听到周围的声音，所有这些声音都只会让你将你的注意力更好地集中在我的声音上，引导着你进入更深的放松和催眠的状态。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"7.2","title":"步骤 7.2 放松的感觉会继续向上走，从你的大腿、臀部，继续向上，到达腰部，背部，体会腰背部的肌肉在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。好，做的很好！","blocks":[{"kind":"reading","text":"放松的感觉会继续向上走，从你的大腿、臀部，继续向上，到达腰部，背部，体会腰背部的肌肉在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。好，做的很好！"},{"kind":"reading","text":"现在，去体会你的腹部，体会腹部的肌肉在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。"},{"kind":"reading","text":"现在，去注意你的胸部，体会你的呼吸更加顺畅，身体更加放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。"}]},{"id":"7.3","title":"步骤 7.3 放松的感觉继续向上传递，到达你的肩膀，从你的双肩传递到你的上臂、前臂、你的双手、每一根手指尖，所有的肌肉都在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。好，做的很好！","blocks":[{"kind":"reading","text":"放松的感觉继续向上传递，到达你的肩膀，从你的双肩传递到你的上臂、前臂、你的双手、每一根手指尖，所有的肌肉都在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。好，做的很好！"},{"kind":"reading","text":"放松的感觉透过肩膀继续向上，到达你的颈部，继续向上从你的后脑到达你的头顶，向前到达你的额头、你的面部，去体会你全身的每一块肌肉、每一个细胞都得到了完全的放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。好，做的很好！"}]},{"id":"7.4","title":"步骤 7.4（5-0加深）","blocks":[{"kind":"reading","text":"过一会儿，我会从5向下数到0，随着我每数一个数字，你都会加倍的放松，当我数到0时，你就会完全的放松，进入到更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"5．．．加倍地放松、"},{"kind":"reading","text":"4．．．加倍地放松、"},{"kind":"reading","text":"3．．．加倍地放松、"},{"kind":"reading","text":"2．．．加倍地放松、"},{"kind":"reading","text":"1．．．加倍地放松、"},{"kind":"reading","text":"0．．更深的睡着（响指）"}]},{"id":"7.5","title":"步骤 7.5（催眠后暗示）从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，甚至更深的催眠状态，同时身体完全放松，更深地睡着。","blocks":[{"kind":"reading","text":"（催眠后暗示）从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，甚至更深的催眠状态，同时身体完全放松，更深地睡着。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"7.6","title":"步骤 7.6 0-5唤醒","blocks":[{"kind":"reading","text":"好，过一会，我会从0向上数到5，随着我每数一个数字，你都会越来越清醒，当我数到5时，你就会睁开眼睛，完全清醒，感觉头脑清醒，身体轻松舒适。"},{"kind":"reading","text":"0，更深地睡着，完全放松。"},{"kind":"reading","text":"1，越来越清醒，"},{"kind":"reading","text":"2，越来越清醒，"},{"kind":"reading","text":"3，当我数到5时，你就会睁开眼睛，完全清醒，"},{"kind":"reading","text":"4，好，做一个深呼吸，吸气，"},{"kind":"reading","text":"5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！"}]},{"id":"7.7","title":"步骤 7.7 眼睛没睁开，就再重复。","blocks":[{"kind":"reading","text":"1、2、3、4、5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！来，伸个懒腰（双轨沟通）。"},{"kind":"op","text":"0→5若一眨眼又闭上眼，睡了，观察呼吸，睁眼那一刻呼吸急促，那就5→0加深，反复到ta呼吸平缓（不急促），然后再0→5唤醒。最多4-5轮唤醒，0→5，0→5，0→5，0→5，0→5，坚决温柔地叫醒，最后叫大名，人容易醒过来。"}]},{"id":"8","title":"步骤8 手指分开导入（大流程3遍循环，小流程5遍循环）（步骤 8.1 手指分开&带动确认）","blocks":[{"kind":"reading","text":"现在，我会拿起你的手臂（注意，是左手）。"},{"kind":"reading","text":"将你的注意力集中在中指指尖，过一会儿，当我放开你的手臂时，你的手指会自然分开。"},{"kind":"reading","text":"手指在分开，手指间分开的距离越来越大；手指在分开，手指间分开的距离越来越大。"},{"kind":"reading","text":"随着你的手指在继续分开，去体会一下，是你的手掌还是手臂在向你的面部靠近，越来越近，越来越近，体会到了可以用语言来告诉我，是手掌还是手臂？（等待回应）"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"8.2","title":"步骤 8.2 带动&靠近","blocks":[{"kind":"op","text":"继续重复循环说引导语①-⑤句，虽然直到手指接触到面部，但是，大流程3遍循环，小流程5遍循环。"},{"kind":"reading","text":"①手指在分开，手指间分开的距离越来越大：手指在分开，手指间分开的距离越来越大。"},{"kind":"reading","text":"②现在手掌带动手臂（或手臂带动手掌）继续向你的面部靠近，越来越近，随着手指继续分开，手掌带动手臂（或手臂带动手掌）继续向你的面部靠近，越来越近。"}]},{"id":"8.3","title":"步骤 8.3 眼皮&呼吸","blocks":[{"kind":"reading","text":"③现在，注意你的眼皮，去体会眼皮会越来越沉，眼睛眨动的次数越来越多，眼睛眨动的次数越多，眼皮就会变得更加沉重，过一会儿，你就会闭上眼睛。（闭上眼睛之后，就只说眼皮越来越沉）"},{"kind":"reading","text":"④同时，注意你的呼吸，你的呼吸会越来越深，随着每一次吸气，你的手臂和手就会继续向面部靠近；随着每一次呼气，你的头也会逐渐低垂，去靠近你的手，头和手之间的距离在越来越近。"},{"kind":"reading","text":"⑤过一会儿，当你的手接触到面部的时候，我会对你说“睡着”两个字，这个“睡着”并不代表像晚上一样睡着，而只是代表你闭着眼睛，身体完全放松的状态。"},{"kind":"op","text":"观察眼睛，如果没闭上眼睛，"},{"kind":"reading","text":"来，现在允许自己闭上眼睛"}]},{"id":"8.4","title":"步骤 8.4 三位一体","blocks":[{"kind":"reading","text":"睡着（点额头，打响指）"},{"kind":"op","text":"（接催眠后暗示）"},{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，甚至更深的催眠状态，同时身体完全放松，更深地睡着。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"9","title":"步骤9 手臂放落加深：（大流程1遍，小流程1遍或3遍循环）（步骤 9.1 拿起手臂&催眠后暗示）","blocks":[{"kind":"reading","text":"过一会儿，我会拿起你的手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"好，完全放松（拿手），更深地睡着（将手在距离大腿10cm的高度放落到大腿上）。"},{"kind":"reading","text":"睡着！"},{"kind":"op","text":"催眠后暗示："},{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在、甚至更深的催眠状态，同时身体完全放松，更深地睡着。好，做得很好!"}]},{"id":"9.2","title":"步骤 9.2拿起另一只手臂&催眠后暗示","blocks":[{"kind":"reading","text":"过一会儿，我会拿起你另外一只手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"好，完全放松（拿手），更深地睡着（将手在距离大腿10cm的高度放落到大腿上）。"},{"kind":"reading","text":"睡着！"},{"kind":"op","text":"催眠后暗示："},{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在、甚至更深的催眠状态，同时身体完全放松，更深地睡着。好，做得很好!"}]},{"id":"10","title":"步骤10 ：5到0加深技术","blocks":[{"kind":"op","text":"最常用的加深技术，在后面会讲更多的加深技术。从高到低代表意识和身体都更加放松，进入到更深的催眠状态。0则代表“睡着”的催眠状态。"},{"kind":"op","text":"人的大脑喜欢数字，这样会让一切明确化，产生安全感和可控感。"}]},{"id":"10.1","title":"步骤10.1 从5向下数到0","blocks":[{"kind":"reading","text":"过一会儿，我会从5向下数到0，随着我每数一个数字，你都会加倍的放松，当我数到0时，你就会完全的放松，进入到更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"5···加倍地放松，"},{"kind":"reading","text":"4···加倍地放松，"},{"kind":"reading","text":"3···加倍地放松，"},{"kind":"reading","text":"2···加倍地放松，"},{"kind":"reading","text":"1···加倍地放松，"},{"kind":"reading","text":"0···更深的睡着（响指）"},{"kind":"reading","text":"（没打响不用在在意，继续）"},{"kind":"reading","text":"（含催眠后暗示）：现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，、至更深的催眠状态，同时身体完全放松，更深地睡着。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"11","title":"步骤11: 0-5唤醒（步骤11.1 从0向上数到5）","blocks":[{"kind":"reading","text":"好，过一会，我会从0向上数到5，随着我每数一个数字，你都会越来越清醒，当我数到5时，你就会睁开眼睛，完全清醒，感觉头脑清醒，身体轻松舒适。"},{"kind":"reading","text":"0，更深地睡着，完全放松。"},{"kind":"reading","text":"1，越来越清醒，"},{"kind":"reading","text":"2，越来越清醒，"},{"kind":"reading","text":"3，当我数到5时，你就会睁开眼睛，完全清醒，"},{"kind":"reading","text":"4，好，做一个深呼吸，吸气，"},{"kind":"reading","text":"5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！"}]},{"id":"11.2","title":"步骤11.2 眼睛没睁开，就再重复。","blocks":[{"kind":"reading","text":"1、2、3、4、5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！来，伸个懒腰（双轨沟通）。"},{"kind":"op","text":"说明："},{"kind":"op","text":"0→5若一眨眼又闭上眼，睡了，观察呼吸，睁眼那一刻呼吸急促，那就5→0加深，反复到ta呼吸平缓（不急促），然后再0→5唤醒。最多4-5轮唤醒，0→5，0→5，0→5，0→5，0→5，坚决温柔地叫醒，最后叫大名，人容易醒过来。"},{"kind":"op","text":"最后：起来喝口水，想睡觉回家睡，催眠室不是睡觉的地方。"}]},{"id":"__q_bdc-post","title":"伯恩斯 BDC 量表（催眠后）","blocks":[],"pseudo":"questionnaire:bdcPost"},{"id":"__q_bai-post","title":"伯恩斯 BAI 量表（催眠后）","blocks":[],"pseudo":"questionnaire:baiPost"},{"id":"__state_post","title":"催眠后：来访者状态复测","blocks":[],"pseudo":"state:post"},{"id":"__comparison","title":"催眠前后评分对比","blocks":[],"pseudo":"comparison"}],"questionnaires":{"questionnaire1":{"id":"table-1","title":"暗示感受性问卷（一）","items":[{"id":"table-1-q1","text":"你在成年后是否梦游过?","options":["是","否"]},{"id":"table-1-q2","text":"你在十几岁时，如果向父母表达你的感受，你会感觉自然吗?","options":["是","否"]},{"id":"table-1-q3","text":"当你与别人讨论有趣的话题时，你会直接看着对方的眼睛，或者靠近对方吗?","options":["是","否"]},{"id":"table-1-q4","text":"你是否认为，对大多数人而言，当他们第一次见到你时，他们并不会太在意你的外表?","options":["是","否"]},{"id":"table-1-q5","text":"当你第一次参加一个团体活动，你是否会很自然地主动开始交谈，将别人的注意力吸引到你身上来?","options":["是","否"]},{"id":"table-1-q6","text":"如果在别人面前和恋人(配偶)牵手或拥抱，你是否感觉很自然?","options":["是","否"]},{"id":"table-1-q7","text":"当别人说感觉暖和时，你也会开始觉得暖和吗?","options":["是","否"]},{"id":"table-1-q8","text":"在别人与你谈话时，你是否会因为忙于思考自己应该说什么，而没有听清对方在讲什么?","options":["是","否"]},{"id":"table-1-q9","text":"你是否感到通过视觉比通过听觉能更好地学习和领会要学习的东西?","options":["是","否"]},{"id":"table-1-q10","text":"在新的班级里或听报告时，你是否可以很自然地当众提问?","options":["是","否"]},{"id":"table-1-q11","text":"当表述你的想法时，你是否觉得需要将与之有关的所有细节都叙述清楚，才能让对方完全理解?","options":["是","否"]},{"id":"table-1-q12","text":"你喜欢和小孩在一起玩吗?","options":["是","否"]},{"id":"table-1-q13","text":"即使是在陌生人群与环境当中，你也能轻松做到让自己的身体运动自然随意?","options":["是","否"]},{"id":"table-1-q14","text":"你更愿意读小说，而不是非小说类的作品?","options":["是","否"]},{"id":"table-1-q15","text":"如果让你想象一下，你正在咬一个又酸、又涩、又多汁的橙子，你嘴里会产生口水吗?","options":["是","否"]},{"id":"table-1-q16","text":"如果你工作出色应当得到表扬，当你确实被当众表扬时，你会感觉自然吗?","options":["是","否"]},{"id":"table-1-q17","text":"你感觉自己是一个健谈的人吗?","options":["是","否"]},{"id":"table-1-q18","text":"当别人赞美你的体形或外表时，你会感觉自然吗?","options":["是","否"]}],"scoreOptions":false,"needsReadAloud":false,"showsIntro":true,"allowsSkip":true,"scoring":{"yesScore":{"1":10,"2":10},"default":5}},"questionnaire2":{"id":"table-2","title":"暗示感受性问卷（二）","items":[{"id":"table-2-q1","text":"你是否曾经在半夜突然醒来，感到身体不能动也/或不能说话?","options":["是","否"]},{"id":"table-2-q2","text":"孩童时，与父母说话的实际内容相比，你是否感觉更易受他们音调语气的影响?","options":["是","否"]},{"id":"table-2-q3","text":"当某个熟人谈起一种你所体验过的恐惧时，你是否往往也会有害怕或不安的感觉?","options":["是","否"]},{"id":"table-2-q4","text":"与人争论过后，你是否还会细想自己当时本该说什么或可以怎样说?","options":["是","否"]},{"id":"table-2-q5","text":"在他人与你谈话时，你是否会因为想起毫不相关的事儿而偶尔走神儿，以至于没有听到对方在说什么?","options":["是","否"]},{"id":"table-2-q6","text":"你是否有时渴望因工作出色而受到表扬，但被表扬时却感到尴尬或不自在?","options":["是","否"]},{"id":"table-2-q7","text":"你是否常会担心或害怕不能与初次见面的人顺利交谈?","options":["是","否"]},{"id":"table-2-q8","text":"当别人关注你的身体或外表时，你会感觉到尴尬吗?","options":["是","否"]},{"id":"table-2-q9","text":"如果可以选择的话，你是否会在大部分时间里避免与儿童在一起?","options":["是","否"]},{"id":"table-2-q10","text":"你是否感觉身体动作不够轻松随意，尤其是在陌生人群与环境中?","options":["是","否"]},{"id":"table-2-q11","text":"与小说相比，你是否更愿意阅读非小说类作品?","options":["是","否"]},{"id":"table-2-q12","text":"如果有人描述很苦的味道时，你是否感觉难以体验那种感受?","options":["是","否"]},{"id":"table-2-q13","text":"一般来说，你是否总感觉自己眼中的自己不如别人眼中的你?","options":["是","否"]},{"id":"table-2-q14","text":"在其他人面前，你与恋人或配偶牵手、拥抱时是否常会感到尴尬或难为情?","options":["是","否"]},{"id":"table-2-q15","text":"在新的班级里或听演讲的场合，在你很希望听到进一步的解释而当众提问时，你是否也会感觉不自然?","options":["是","否"]},{"id":"table-2-q16","text":"与人初次见面，尤其是在谈论关于你的话题时，如果对方说话时直视你的眼睛，你是否会感觉不自然?","options":["是","否"]},{"id":"table-2-q17","text":"与众人刚见面时，当你开始一个话题而引起了大家的注意，这时你是否会感觉不自然?","options":["是","否"]},{"id":"table-2-q18","text":"如果你正在恋爱，或与某人关系亲密，你是否会觉得难以通过语言表达你的爱意?","options":["是","否"]}],"scoreOptions":false,"needsReadAloud":false,"showsIntro":true,"allowsSkip":true,"scoring":{"yesScore":{"1":10,"2":10},"default":5}},"bdcPre":{"id":"bdc-pre","title":"伯恩斯 BDC 量表（催眠前）","items":[{"id":"bdc-pre-q1","text":"悲伤：你觉得悲伤或泄气吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-pre-q2","text":"沮丧感：觉得前途渺茫吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-pre-q3","text":"自我评价低：你觉得内疚，自己没用或低人一等吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-pre-q4","text":"兴趣缺乏：你对工作、爱好、家庭或朋友不感兴趣吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-pre-q5","text":"自杀冲动：你觉得活着没有意义或不如死了好？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]}],"scoreOptions":true,"needsReadAloud":true,"showsIntro":true,"allowsSkip":true},"baiPre":{"id":"bai-pre","title":"伯恩斯 BAI 量表（催眠前）","items":[{"id":"bai-pre-q1","text":"感到焦虑，紧张，担心，惊慌，害怕","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-pre-q2","text":"感到紧绷，疲乏或无法放松","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-pre-q3","text":"感到压力、烦躁、或濒临崩溃","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-pre-q4","text":"令人恐惧的幻想或让自己害怕的想法，幻想","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-pre-q5","text":"躯体感到紧张，例如僵硬，肌肉紧张，呼吸急促或心跳过速","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]}],"scoreOptions":true,"needsReadAloud":true,"showsIntro":true,"allowsSkip":true},"suggestibilityCheck":{"id":"suggestibility-check","title":"暗示感受性问题（是 / 否）","items":[{"id":"suggestibility-check-q1","text":"你曾经梦游过或说过梦话吗?","options":["是","否"]},{"id":"suggestibility-check-q2","text":"你曾在晚上醒来，感觉自己不能动或不能说话吗?","options":["是","否"]},{"id":"suggestibility-check-q3","text":"与人争论后，有想过自己当时本来可以说或应该说什么吗?","options":["是","否"]},{"id":"suggestibility-check-q4","text":"如果要你想象去咬一个酸柠檬，你嘴里会流口水吗?","options":["是","否"]},{"id":"suggestibility-check-q5","text":"如果让你想象一个东西的样子，你可以想得出来吗?","options":["是","否"]}],"scoreOptions":false,"needsReadAloud":false,"showsIntro":false,"allowsSkip":false},"bdcPost":{"id":"bdc-post","title":"伯恩斯 BDC 量表（催眠后）","items":[{"id":"bdc-post-q1","text":"悲伤：你觉得悲伤或泄气吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-post-q2","text":"沮丧感：觉得前途渺茫吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-post-q3","text":"自我评价低：你觉得内疚，自己没用或低人一等吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-post-q4","text":"兴趣缺乏：你对工作、爱好、家庭或朋友不感兴趣吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-post-q5","text":"自杀冲动：你觉得活着没有意义或不如死了好？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]}],"scoreOptions":true,"needsReadAloud":true,"showsIntro":true,"allowsSkip":true},"baiPost":{"id":"bai-post","title":"伯恩斯 BAI 量表（催眠后）","items":[{"id":"bai-post-q1","text":"感到焦虑，紧张，担心，惊慌，害怕","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-post-q2","text":"感到紧绷，疲乏或无法放松","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-post-q3","text":"感到压力、烦躁、或濒临崩溃","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-post-q4","text":"令人恐惧的幻想或让自己害怕的想法，幻想","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-post-q5","text":"躯体感到紧张，例如僵硬，肌肉紧张，呼吸急促或心跳过速","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]}],"scoreOptions":true,"needsReadAloud":true,"showsIntro":true,"allowsSkip":true}},"stateForm":{"emotionOptions":["焦虑","紧张","悲伤","愤怒","恐惧","其他"],"bodyOptions":["胃部","腹部","头部","肩膀","眼睛","胸口","其他"],"maxRounds":3,"scale":[0,10]}};
 /* ===== src/core/normalize.js ===== */
@@ -779,12 +802,15 @@ var CSV = (function () {
     tracker: null,         // Coverage Tracker（当前朗读单元）
     asrDegraded: false,
     userPaused: false,
+    lastHeard: '',      // 最近识别到的文本片段（仅用于朗读页提示）
     opTimer: null,
     voiceTimer: null,
     detailId: null
   };
 
   var V = FLOW.voice;
+  V.noResultMs = V.noResultMs || V.watchdogMs || 6000; // 多久听不到任何内容算「识别不到」
+  V.liveWindowMs = V.liveWindowMs || 3000;            // 距上次识别结果多久内算「正在识别」
 
   // ================= 会话与记录 =================
   function newSession() {
@@ -1001,6 +1027,7 @@ var CSV = (function () {
     app.unitIndex = Math.max(0, i);
     app.screenIndex = 0;
     app.userPaused = false;
+    app.lastHeard = '';
     snapshot();
     render();
   }
@@ -1101,23 +1128,29 @@ var CSV = (function () {
   function renderReading(ui, unit) {
     var b = ui.body;
     var sentences = splitSentences(unit.texts);
-    var reserveH = 62; // voice-bar 高度
+    var reserveH = 84; // voice-bar 高度（状态行 + 进度条 + 听到的文本行）
     var screens = paginateSentences(sentences, '', reserveH);
     if (app.screenIndex >= screens.length) app.screenIndex = screens.length - 1;
     var scr = screens[app.screenIndex];
 
-    // 语音状态条
+    // 语音状态条：呼吸灯 + 覆盖率进度条 + 最近识别到的文本
     var bar = el('div', 'voice-bar');
     var status = el('div', 'voice-status');
+    var left = el('div', 'status-left');
+    var dot = el('span', 'dot');
     var st = el('span', 'st', '');
+    left.appendChild(dot);
+    left.appendChild(st);
     var pct = el('span', '', '0%');
-    status.appendChild(st);
+    status.appendChild(left);
     status.appendChild(pct);
     var track = el('div', 'prog-track');
     var fill = el('div', 'prog-fill');
     track.appendChild(fill);
+    var heard = el('div', 'voice-heard', '');
     bar.appendChild(status);
     bar.appendChild(track);
+    bar.appendChild(heard);
 
     var c = el('div', 'content');
     for (var i = scr.from; i <= scr.to; i++) {
@@ -1139,17 +1172,23 @@ var CSV = (function () {
         if (app.manager) app.manager.pause();
       }
     };
+    // 「重新识别」默认隐藏，仅在「识别不到」时才出现
     var restartBtn = el('button', 'btn btn-ghost btn-small', '重新识别');
+    restartBtn.style.display = 'none';
     restartBtn.onclick = function () {
-      if (app.manager && !app.manager.degraded) {
-        app.manager.reset();
-        app.manager.start();
-        app.userPaused = false;
-        pauseBtn.textContent = '暂停';
-        setVoiceStatus();
-      } else {
-        toast('当前环境不支持语音识别');
+      if (!app.manager || !ASR.available()) {
+        toast(ASR.isWeChat() ? '微信内不支持语音识别，请在浏览器中打开' : '当前环境不支持语音识别');
+        return;
       }
+      app.manager.degraded = false;   // 允许手动重试（含 watchdog 永久降级之后）
+      app.asrDegraded = false;
+      app.manager.reset();
+      app.userPaused = false;
+      pauseBtn.textContent = '暂停';
+      app.manager.start();
+      app.lastHeard = '';
+      toast('已重新开始识别');
+      render();
     };
 
     navFooter(ui, {
@@ -1161,13 +1200,44 @@ var CSV = (function () {
       }
     });
 
-    // 更新进度 UI
+    // 距上次收到识别结果的毫秒数（-1 表示不在识别状态）
+    function asrIdle() {
+      var m = app.manager;
+      if (!m || !m.active || m.degraded) return -1;
+      return Date.now() - (m.lastResultTs || m.startedAt || Date.now());
+    }
+
+    // 是否「识别不到」：只有此时才需要「重新识别」入口
+    function needRestart() {
+      var m = app.manager;
+      if (!m || !ASR.available()) return false;       // 环境不支持：按钮无意义
+      if (m.degraded || app.asrDegraded) return true; // 已降级：给一次手动重试机会
+      if (!m.active) return false;                    // 用户主动暂停：不算识别不到
+      var p = app.tracker ? app.tracker.progress() : 0;
+      if (p >= V.threshold) return false;             // 已达标等静音：属正常流程
+      var idle = asrIdle();
+      return idle >= 0 && idle >= V.noResultMs;       // 长时间听不到任何内容
+    }
+
+    function syncRestartBtn() {
+      restartBtn.style.display = needRestart() ? '' : 'none';
+    }
+
+    // 更新识别状态 UI：状态文字 + 覆盖率进度 + 是否正在识别（呼吸灯 / 流动条纹）
     function setVoiceStatus(txt, off) {
-      st.textContent = txt || '';
-      st.className = 'st' + (off ? ' off' : '');
+      var idle = asrIdle();
+      var live = idle >= 0 && idle < V.liveWindowMs;
+      dot.className = 'dot' + (live ? ' live' : (off || idle >= V.noResultMs ? ' idle' : ''));
+      fill.className = 'prog-fill' + (live ? ' live' : '');
+      if (txt !== undefined) {
+        st.textContent = txt;
+        st.className = 'st' + (off ? ' off' : '');
+      }
       var p = app.tracker ? app.tracker.progress() : 0;
       pct.textContent = Math.round(p * 100) + '%';
       fill.style.width = Math.round(p * 100) + '%';
+      heard.textContent = app.lastHeard ? ('听到：' + app.lastHeard) : '';
+      syncRestartBtn();
     }
 
     function highlight() {
@@ -1192,6 +1262,7 @@ var CSV = (function () {
 
     if (reason) {
       setVoiceStatus(reason, true);
+      if (!ASR.available()) syncRestartBtn(); // 环境不支持：不给按钮；已降级：给手动重试
       return;
     }
 
@@ -1199,20 +1270,23 @@ var CSV = (function () {
     if (!app.manager) {
       app.manager = new ASR.Manager({
         lang: V.lang,
+        watchdogMs: V.watchdogMs,
         onResult: function (cum) {
           if (!app.tracker) return;
           app.tracker.feed(cum);
-          setVoiceStatus('聆听中');
+          // 记住最近听到的内容，让朗读者确认「它确实听到了我说的」
+          app.lastHeard = (cum || '').replace(/\s+/g, '').slice(-16);
+          setVoiceStatus('识别中…');
           highlight();
         },
         onStatus: function (s) {
-          if (s === 'listening') setVoiceStatus('聆听中');
+          if (s === 'listening') setVoiceStatus(app.manager.lastResultTs > 0 ? '识别中…' : '聆听中');
           else if (s === 'paused') setVoiceStatus('已暂停');
         },
         onDegrade: function (r) {
           app.asrDegraded = true;
           setVoiceStatus('识别已降级·手动模式', true);
-          toast('语音识别' + (r || '不可用') + '，请手动点「下一步」继续');
+          toast('语音识别' + (r || '不可用') + '，可点「重新识别」重试或手动继续');
           render();
         }
       });
@@ -1222,6 +1296,7 @@ var CSV = (function () {
     if (!app.tracker || app.tracker.unitId !== unit.id) {
       app.tracker = new Coverage.Tracker(sentences);
       app.tracker.unitId = unit.id;
+      app.lastHeard = '';
     }
 
     if (app.userPaused) {
@@ -1232,19 +1307,25 @@ var CSV = (function () {
       setVoiceStatus('聆听中');
     }
 
-    // 自动翻页轮询：进度≥85% 且 静音 3 秒
+    // 自动翻页 / 状态刷新轮询（500ms）
     app.voiceTimer = setInterval(function () {
-      if (!app.tracker || !app.manager || !app.manager.active) return;
+      if (!app.tracker || !app.manager) return;
+      var m = app.manager;
+      if (!m.active || m.degraded) { syncRestartBtn(); return; }
       var p = app.tracker.progress();
-      var silent = Date.now() - (app.manager.lastResultTs || 0) >= V.silenceMs;
-      var ok = (p >= V.threshold || app.tracker.doneAll()) && silent && app.manager.lastResultTs > 0;
+      var silent = Date.now() - (m.lastResultTs || 0) >= V.silenceMs;
+      var ok = (p >= V.threshold || app.tracker.doneAll()) && silent && m.lastResultTs > 0;
       if (ok) {
         if (app.screenIndex < screens.length - 1) { app.screenIndex++; render(); }
         else { toast('朗读完成，自动进入下一步'); nextUnit(); }
       } else if (p >= V.threshold && !silent) {
         setVoiceStatus('已达标，等待静音 3 秒…');
-      } else if (app.manager.lastResultTs > 0 && Date.now() - app.manager.lastResultTs >= 2000) {
-        setVoiceStatus('聆听中（已静音）');
+      } else if (m.lastResultTs > 0 && Date.now() - m.lastResultTs >= V.liveWindowMs) {
+        setVoiceStatus('聆听中（暂未识别到内容）');
+      } else if (m.lastResultTs === 0 && Date.now() - (m.startedAt || Date.now()) >= V.noResultMs) {
+        setVoiceStatus('未听到声音·请检查麦克风', true);
+      } else {
+        setVoiceStatus(m.lastResultTs > 0 ? '识别中…' : '聆听中');
       }
     }, 500);
   }
