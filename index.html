@@ -1263,7 +1263,6 @@ var CSV = (function () {
     if (reason) {
       setVoiceStatus(reason, true);
       if (!ASR.available()) syncRestartBtn(); // 环境不支持：不给按钮；已降级：给手动重试
-      return;
     }
 
     // 创建/复用 Manager
@@ -1299,33 +1298,40 @@ var CSV = (function () {
       app.lastHeard = '';
     }
 
-    if (app.userPaused) {
-      setVoiceStatus('已暂停');
-    } else {
-      app.manager.reset();
-      app.manager.start();
-      setVoiceStatus('聆听中');
+    // 仅在 ASR 仍可用时启动识别；reason（已降级/不可用）时不重启
+    if (!reason) {
+      if (app.userPaused) {
+        setVoiceStatus('已暂停');
+      } else {
+        app.manager.reset();
+        app.manager.start();
+        setVoiceStatus('聆听中');
+      }
     }
 
-    // 自动翻页 / 状态刷新轮询（500ms）
+    // 自动翻页 / 状态刷新轮询（500ms）—— 无论 ASR 是否可用都常驻，保证降级后仍按覆盖率翻页
     app.voiceTimer = setInterval(function () {
       if (!app.tracker || !app.manager) return;
       var m = app.manager;
-      if (!m.active || m.degraded) { syncRestartBtn(); return; }
       var p = app.tracker.progress();
-      var silent = Date.now() - (m.lastResultTs || 0) >= V.silenceMs;
-      var ok = (p >= V.threshold || app.tracker.doneAll()) && silent && m.lastResultTs > 0;
+      var lastTs = m.lastResultTs || 0;
+      // 已降级时 ASR 已不可用，按"自上次成功识别后 ≥ silenceMs"判定静音（lastTs 是降级前最后一次成功识别的时间戳）
+      var silent = lastTs > 0 && Date.now() - lastTs >= V.silenceMs;
+      var ok = (p >= V.threshold || app.tracker.doneAll()) && silent && lastTs > 0;
       if (ok) {
         if (app.screenIndex < screens.length - 1) { app.screenIndex++; render(); }
         else { toast('朗读完成，自动进入下一步'); nextUnit(); }
-      } else if (p >= V.threshold && !silent) {
+        return;
+      }
+      if (reason || !m.active || m.degraded) { syncRestartBtn(); return; }
+      if (p >= V.threshold && !silent) {
         setVoiceStatus('已达标，等待静音 3 秒…');
-      } else if (m.lastResultTs > 0 && Date.now() - m.lastResultTs >= V.liveWindowMs) {
+      } else if (lastTs > 0 && Date.now() - lastTs >= V.liveWindowMs) {
         setVoiceStatus('聆听中（暂未识别到内容）');
-      } else if (m.lastResultTs === 0 && Date.now() - (m.startedAt || Date.now()) >= V.noResultMs) {
+      } else if (lastTs === 0 && Date.now() - (m.startedAt || Date.now()) >= V.noResultMs) {
         setVoiceStatus('未听到声音·请检查麦克风', true);
       } else {
-        setVoiceStatus(m.lastResultTs > 0 ? '识别中…' : '聆听中');
+        setVoiceStatus(lastTs > 0 ? '识别中…' : '聆听中');
       }
     }, 500);
   }
