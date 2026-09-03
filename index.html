@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="axYyECrBeHZt3p4pI3U6Tv">
+<head data-page-node-id="dTWK8XQk7n9vM7gbEUy3NG">
+<meta charset="UTF-8" data-page-node-id="phk6KK6CMSfPT3E0HjqEhu">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" data-page-node-id="8vlciD43Ss510o243Yq1d6">
+<meta name="apple-mobile-web-app-capable" content="yes" data-page-node-id="NqAGGuuW5C8yG0zkB2nxFv">
+<meta name="format-detection" content="telephone=no" data-page-node-id="Y3o9GVq24BUcsq8grAITN4">
+<meta name="theme-color" content="#f6f4ef" data-page-node-id="9F9Aa4P27wJmwM1KLxE5LO">
+<title>催眠流程引导</title>
+<style>
+/* 催眠流程引导 · 样式（移动端优先，纸墨暖色） */
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #f6f4ef;
+  color: #2c2a26;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+#app { height: 100%; display: flex; flex-direction: column; max-width: 640px; margin: 0 auto; }
+
+/* ===== 布局骨架 ===== */
+.screen { display: flex; flex-direction: column; height: 100%; }
+.hd {
+  padding: calc(env(safe-area-inset-top, 0px) + 10px) 18px 10px;
+  border-bottom: 1px solid #e7e2d8;
+  background: #f6f4ef;
+  flex-shrink: 0;
+}
+.hd .step-title { font-size: 15px; font-weight: 600; color: #4a4640; line-height: 1.45; }
+.hd .unit-pos { font-size: 12px; color: #9a938a; margin-top: 2px; }
+.body {
+  flex: 1; overflow: hidden; padding: 18px 20px;
+  display: flex; flex-direction: column; min-height: 0;
+}
+.ft {
+  flex-shrink: 0; padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 12px);
+  border-top: 1px solid #e7e2d8; background: #f6f4ef;
+  display: flex; gap: 10px; align-items: center;
+}
+
+/* ===== 按钮 ===== */
+.btn {
+  flex: 1; border: none; border-radius: 12px; padding: 13px 10px;
+  font-size: 16px; font-weight: 600; cursor: pointer;
+  transition: opacity .15s, transform .05s;
+}
+.btn:active { transform: scale(.97); }
+.btn:disabled { opacity: .35; }
+.btn-primary { background: #4a6fa5; color: #fff; }
+.btn-ghost { background: #fff; color: #4a6fa5; border: 1.5px solid #c6d3e4; flex: 0 0 auto; padding: 13px 18px; }
+.btn-warn { background: #fff; color: #b05a4a; border: 1.5px solid #e3c4bb; flex: 0 0 auto; padding: 13px 16px; }
+.btn-block { display: block; width: 100%; margin-bottom: 12px; }
+.btn-small { padding: 8px 14px; font-size: 14px; border-radius: 9px; }
+
+/* ===== 首页 ===== */
+.home { padding: 26px 22px; overflow-y: auto; }
+.app-name { font-size: 26px; font-weight: 700; letter-spacing: 2px; color: #3a3733; }
+.app-sub { font-size: 13px; color: #9a938a; margin: 6px 0 20px; }
+.notice {
+  background: #fff; border: 1px solid #e7e2d8; border-radius: 14px;
+  padding: 14px 16px; font-size: 13px; line-height: 1.75; color: #6b665f; margin-bottom: 22px;
+}
+.notice b { color: #4a4640; }
+.notice .warn { color: #b05a4a; }
+
+/* ===== 内容区 ===== */
+.content { font-size: 18px; line-height: 1.95; color: #33302b; overflow: hidden; flex: 1; }
+.content.op-content { font-size: 16px; line-height: 1.85; color: #5a554e; }
+.sentence { display: block; }
+.sentence.done { color: #b3aca0; }
+.sentence.cur { color: #1f4e79; font-weight: 600; }
+.op-tag {
+  display: inline-block; font-size: 12px; color: #9a8a5a; background: #f3ecd9;
+  border-radius: 6px; padding: 1px 8px; margin-bottom: 10px; letter-spacing: 1px;
+}
+.auto-tip { font-size: 12px; color: #9a938a; margin-top: 12px; text-align: center; }
+
+/* ===== 朗读进度 ===== */
+.voice-bar { flex-shrink: 0; margin-bottom: 14px; }
+.voice-status { display: flex; justify-content: space-between; font-size: 12px; color: #9a938a; margin-bottom: 6px; }
+.voice-status .st { color: #4a6fa5; }
+.voice-status .st.off { color: #b05a4a; }
+.prog-track { height: 7px; border-radius: 4px; background: #e7e2d8; overflow: hidden; }
+.prog-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #7d9ec7, #4a6fa5); border-radius: 4px; transition: width .3s; }
+
+/* ===== 表单 ===== */
+.form-row { margin-bottom: 16px; }
+.form-row label { display: block; font-size: 14px; color: #6b665f; margin-bottom: 7px; font-weight: 600; }
+.form-row input, .form-row textarea {
+  width: 100%; border: 1.5px solid #ddd6c9; border-radius: 12px; padding: 12px 14px;
+  font-size: 16px; background: #fff; color: #2c2a26; font-family: inherit; outline: none;
+}
+.form-row input:focus { border-color: #4a6fa5; }
+
+/* ===== 问答 ===== */
+.q-text { font-size: 19px; line-height: 1.8; color: #33302b; margin-bottom: 18px; font-weight: 500; }
+.q-hint { font-size: 13px; color: #9a938a; margin-bottom: 14px; }
+.opts { display: flex; flex-direction: column; gap: 11px; }
+.opt-btn {
+  border: 1.5px solid #ddd6c9; background: #fff; border-radius: 13px;
+  padding: 14px 16px; font-size: 17px; color: #33302b; text-align: left; cursor: pointer;
+}
+.opt-btn.picked { border-color: #4a6fa5; background: #eef3f9; color: #1f4e79; font-weight: 600; }
+.opt-btn:active { transform: scale(.98); }
+.score-row { margin-bottom: 14px; }
+.score-row .score-name { font-size: 15px; font-weight: 600; color: #4a4640; margin-bottom: 8px; }
+.score-opts { display: flex; flex-wrap: wrap; gap: 7px; }
+.score-opts button {
+  width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid #ddd6c9;
+  background: #fff; font-size: 14px; color: #5a554e; cursor: pointer;
+}
+.score-opts button.picked { background: #4a6fa5; border-color: #4a6fa5; color: #fff; font-weight: 700; }
+.chips { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 18px; }
+.chip {
+  border: 1.5px solid #ddd6c9; background: #fff; border-radius: 20px;
+  padding: 9px 18px; font-size: 15px; color: #5a554e; cursor: pointer;
+}
+.chip.on { background: #4a6fa5; border-color: #4a6fa5; color: #fff; font-weight: 600; }
+
+/* ===== 结果/量表 ===== */
+.big-result { text-align: center; padding: 30px 10px; }
+.big-result .num { font-size: 44px; font-weight: 700; color: #4a6fa5; }
+.big-result .num.red { color: #b05a4a; }
+.big-result .lab { font-size: 15px; color: #6b665f; margin-top: 4px; }
+.big-result .sub { font-size: 13px; color: #9a938a; margin-top: 14px; line-height: 1.7; }
+.cmp-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
+.cmp-table th, .cmp-table td { border: 1px solid #e0dacd; padding: 9px 8px; text-align: center; }
+.cmp-table th { background: #efeadf; color: #4a4640; font-weight: 600; }
+.cmp-table td:first-child { text-align: left; }
+.cmp-table .down { color: #2e7d4f; font-weight: 600; }
+.cmp-table .up { color: #b05a4a; font-weight: 600; }
+.detail-box { background: #fff; border: 1px solid #e7e2d8; border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; }
+.detail-box h4 { font-size: 13px; color: #9a938a; margin-bottom: 6px; }
+.detail-box p { font-size: 14px; color: #5a554e; line-height: 1.7; }
+
+/* ===== 记录页 ===== */
+.rec-list { overflow-y: auto; padding: 14px 16px; }
+.rec-item {
+  background: #fff; border: 1px solid #e7e2d8; border-radius: 13px;
+  padding: 14px 16px; margin-bottom: 11px; cursor: pointer;
+}
+.rec-item .t { font-size: 15px; font-weight: 600; color: #33302b; }
+.rec-item .m { font-size: 12.5px; color: #9a938a; margin-top: 4px; }
+.rec-detail { overflow-y: auto; padding: 16px 18px; }
+.rec-group { margin-bottom: 14px; }
+.rec-group h4 { font-size: 13px; color: #9a8a5a; margin-bottom: 5px; }
+.rec-group .r { font-size: 14px; color: #5a554e; line-height: 1.65; }
+.section-title { font-size: 17px; font-weight: 700; color: #3a3733; margin: 18px 0 10px; }
+textarea.csv-fallback {
+  width: 100%; height: 260px; font-size: 11px; font-family: Menlo, monospace;
+  border: 1px solid #ddd6c9; border-radius: 10px; padding: 10px; background: #fff; color: #333;
+}
+
+/* ===== 顶部提示条 ===== */
+.banner {
+  background: #fdf3e7; color: #a06b2a; font-size: 12.5px; line-height: 1.6;
+  padding: 8px 14px; border-bottom: 1px solid #f0e0c8; flex-shrink: 0;
+}
+.done-hero { text-align: center; padding: 44px 20px 20px; }
+.done-hero .icon { font-size: 52px; }
+.done-hero h2 { font-size: 22px; color: #3a3733; margin: 12px 0 6px; }
+.done-hero p { font-size: 14px; color: #9a938a; }
+
+</style>
+</head>
+<body data-page-node-id="tCPAeofNLhZIkdi0zXXYRz">
+<div id="app" data-page-node-id="2Br56FYLQe5jtr3UloOPGn"></div>
+<script>
+window.__FLOW__ = {"meta":{"title":"催眠大流程","version":"2026-09-02","source":"催眠大流程-含顺序编号.docx（下划线=朗读稿）"},"voice":{"lang":"zh-CN","threshold":0.85,"silenceMs":3000,"watchdogMs":6000,"restartDelays":[300,1000,2000,3500]},"steps":[{"id":"1","title":"步骤1: 催眠前谈话","blocks":[{"kind":"op","text":"体检报告，排除器质性疾患。"}]},{"id":"1.1","title":"步骤1.1 目标设定（实现时间+具体目标，大目标拆分，先实现第一个小目标）","blocks":[]},{"id":"1.2","title":"步骤1.2 头脑理论（原始区、批判区、意识10%、潜意识90%、整合、内在大智慧、知行合一）","blocks":[{"kind":"op","text":"头脑理论：原始区、批判区、意识10%、潜意识90%、整合、内在大智慧、知行合一。我们有一个模型叫头脑理论，这会帮助你懂得催眠。"}]},{"id":"1.2.1","title":"步骤1.2.1","blocks":[{"kind":"reading","text":"这是人的大脑，人才出生只具有大脑的原始区（Primitive Mind），基本反应是战斗（fight）和逃跑（flight），对吗？"},{"kind":"reading","text":"在出生以后，开始认识这个世界，通过定义（I）联系（A）反应（R）的方式来学习。比如说“巧克力”是个定义，产生的联系是棕色、方形的、扁的、香甜的，反应是喜欢吃，这样就在大脑里有了巧克力的概念，是这样的，对吗？"},{"kind":"reading","text":"大脑是通过你所有的感官摄取信息，开始定义，将这些事情建立联系，并产生反应。定义一件事情，它对你来说就变成一个已知的经验，并且你可以将其联系，进而产生正面或负西的反应，我说清楚了吗？"},{"kind":"reading","text":"从一生下来开始，你就逐一地开始学习什么是你喜欢的，什么是你不喜欢的，你将正面与负面的反应与他们联系起来，是这样的，对吗？这经过了成千上万次的经验积累，最终变成对你是已知的事情，并且开始建立起你的世界模式，这没什么对错之分。"}]},{"id":"1.2.2","title":"步骤1.2.2","blocks":[{"kind":"reading","text":"在8到10岁以后，你的逻辑（L）、分析（A）、决定（D）、意志力（W）的能力更加完善，这部分叫意识区。意识区占大脑功能的10%，下面这部分叫潜意识区，它占了我们脑功能的90%，我说清楚了吗？"}]},{"id":"1.2.3","title":"步骤1.2.3","blocks":[{"kind":"reading","text":"你现在有想法，却迟迟无法行动，这是因为你的意识只占了大脑功能的你前提你的建查记能象许设有行动起来，它总是越向干将你留原来的进悉，明白了，是吗？所以，你想有所改变，一定要发挥潜意识这 90％的力量，这样就会运用到自己100%的能力，我说清楚了吗？"},{"kind":"reading","text":"通过催眠，可以激活你的潜意识A从而升级你潜意识的数据庫，让那些你想要的信念和行为能达到你的潜意识，这就会使你知行合一，轻松地实现你的目标，让一就变得容易，我说清楚了吗？"}]},{"id":"1.3","title":"步骤1.3 暗示感受性测试 手指分开&手臂升降（步骤1.3.1 暗示感受性测试——手指分开（主要是左脑还是右脑接受信息））","blocks":[{"kind":"reading","text":"现在我要对你进行暗示感受性测试。这个测试无所谓通过与否，只是来看你是用左脑还是右脑来接受信息的。所以你不需要刻意配合我或抵抗我，只让它自然而然地发生就好，好吗？ 现在，我会拿起你的手臂（注意，是左手）。"},{"kind":"reading","text":"将你的注意力集中在中指指尖，过一会儿，当我放开你的手臂时，你的手指会自然分开。"},{"kind":"reading","text":"手指在分开，手指间分开的距离越来越大；手指在分开，手指间分开的距离越来越大。好，做得很好。我会拿起你另外一只手臂。好，做得很好。"}]},{"id":"1.3.2","title":"步骤1.3.2暗示感受性测试——手臂升降（想象力和身体的程度如何）","blocks":[{"kind":"reading","text":"下面是一个想象力的测试，测试你的想象力影响身体的程度如何。好，现在双臂向前平伸，就像这样，右手掌心朝上，左手大拇指朝上，好，做得很好。现在好好看一下你的双手，过一会儿我会让你去想象一下，我在你的右手上放了一个很沉重的铅球，同时在你的左手大拇指上系了一个很大的氢气球。你的右手将开始下沉，同时左手飘起得越来越高，两只手的距离越来越大。（两手归位）好吗？好，好好地看一下你双手的样子，然后闭上眼睛。当你在头脑中可以想象出你双手的图像时，就点头答是。好，做得很好。现在你开始想象一下，在你的右手上放了一个很沉重的铅球，同时在你的左手大拇指上系了一个很大的氢气球。侧身一步，继续去想象，铅球的体积在变得越来越大，铅球在变得越来越沉重，同时你的手臂也在开始下沉，开始下沉，手臂在下沉，手臂在下沉，越来越沉，越来越沉。好，现在睁开眼睛看看你的手臂。好，你做得很好。"}]},{"id":"1.4.1","title":"步骤1.4.1暗示感受性问卷量表","blocks":[{"kind":"op","text":"量表：暗示感受性问卷(一)"},{"kind":"op","text":"量表：暗示感受性问卷(二)"}]},{"id":"__q_table-1","title":"暗示感受性问卷（一）","blocks":[],"pseudo":"questionnaire:questionnaire1"},{"id":"__q_table-2","title":"暗示感受性问卷（二）","blocks":[],"pseudo":"questionnaire:questionnaire2"},{"id":"__qresult","title":"暗示感受性结果","blocks":[],"pseudo":"qresult"},{"id":"1.4.2","title":"步骤1.4.2 BDC、BAI量表（焦虑抑郁评分）催眠前、催眠后都要评分。","blocks":[{"kind":"op","text":"伯恩斯 BDC 量表"},{"kind":"op","text":"伯恩斯 BAI 量表"}]},{"id":"__q_bdc-pre","title":"伯恩斯 BDC 量表（催眠前）","blocks":[],"pseudo":"questionnaire:bdcPre"},{"id":"__q_bai-pre","title":"伯恩斯 BAI 量表（催眠前）","blocks":[],"pseudo":"questionnaire:baiPre"},{"id":"__q_suggestibility-check","title":"暗示感受性问题（是 / 否）","blocks":[],"pseudo":"questionnaire:suggestibilityCheck"},{"id":"__state_pre","title":"催眠前：来访者状态记录","blocks":[],"pseudo":"state:pre"},{"id":"2","title":"步骤2: 手臂抬起（传统版本，20分钟）（步骤2.1 调整座椅位置）","blocks":[{"kind":"op","text":"移动座椅，向前或向桌面移动，让来访者在椅子里坐直，双脚平放在地面上，左手手臂平放在桌上。要求来访者取下眼镜，吐掉嘴里的口香糖。"},{"kind":"reading","text":"好，双脚平放在地面上，右手放在大腿上，左手放在桌面上，好，做的很好。现在，我会拿起你的手臂。"}]},{"id":"2.2","title":"步骤 2.2 拿起来访者的手，从桌面到脸部接触三次(边说边做)","blocks":[{"kind":"op","text":"一只手轻触来访者左臂肘部(固定位置)，另一只手两根手指从小指方向插入，接触手心，同时感受来访者手心的温度、是否有汗。"}]},{"id":"2.3","title":"步骤 2.3 说明你将测试其暗示感受性","blocks":[{"kind":"op","text":"（暗示感受性问卷，第一次来访需要做，直视来访双眼，触发原始区战逃反应。让其看着催眠师眉心，来访走神时“看到你目光虚焦了，好做得很好，来，现在看着我的眉心”将其轻轻拉回来）"},{"kind":"reading","text":"过一会儿，我会做一个问卷测试，测试中你不需要用语言回答我，如果答案是“是”，就点头，如果答案是“否”，就摇头，如果你不知道怎么回答，你只需要看着我就好了，好吗?"},{"kind":"reading","text":"好，现在看一眼你的手臂，从肘部到指尖，好好记住这个图像，过一会儿，我会让你闭上眼睛，去想出这个图像。"},{"kind":"reading","text":"好，现在闭上眼睛，在头脑中想象出你的手臂和手的样子。当你能想出它们的样子时，点头告诉我(等待回应)。"}]},{"id":"2.4","title":"步骤 2.4 三个生理变化","blocks":[{"kind":"reading","text":"过一会儿，在你进入催眠状态之前，你的身体上会出现一系列的生理变化，我会指出来告诉你，当你也注意到的时候，点头告诉我说是。"},{"kind":"reading","text":"①现在去注意你的呼吸，你的呼吸变得越来越深，同时你的身体会吸进更多的氧气。当你开始注意到呼吸变得越来越深时，可以点头告诉我说是。(等待回应)好，做得很好!"},{"kind":"reading","text":"②现在去注意你的口后、咽喉、舌头，会开始有些发干的感觉，"},{"kind":"reading","text":"甚至要做一些吞咽的动作。当你注意到的时候，点头告诉我说是。(等待回应) 好，做得很好!"},{"kind":"reading","text":"③现在去注意你的眼睛和眼皮。去体会眼皮变得很沉，眼球会在眼皮下轻轻的转动，当你注意到眼球在眼皮下轻轻转动时，点头告诉我说是。(等待回应)好，做得很好!"}]},{"id":"2.5","title":"步骤 2.5 ：信息加载，导入催眠:观察手臂对不同暗示的反应。（加载20min）","blocks":[{"kind":"reading","text":"现在集中注意力到你的肘部，压在桌面上的这支手臂的肘部，去体会你的肘部压向桌面的压力，同时，上臂的肌肉开始绷紧。过一会儿，在你的手臂和手离开桌面之前，你的手指或是手腕会有肌肉牵动和拉动的感觉，当你感觉到时，可以点头告诉我说是。好，做得很好!"},{"kind":"op","text":"①间接暗示:"},{"kind":"reading","text":"去体会从肘部向前到手指尖会变得越来越轻，越来越轻，像羽毛一样越来越轻地向上飘起，飘高，手臂像羽毛一样轻，越来越轻，越飘越高。(重复3遍)好，做得很好!"},{"kind":"op","text":"②直接暗示:"},{"kind":"reading","text":"去体会仿佛有一股拉力,拉着你的手臂向上抬起、抬高,越来越高，越来越高地向上抬起，抬高，越来越高，不断向上抬起，拉起、抬高，越抬越高。(重复3遍)好，做得很好!"},{"kind":"op","text":"③误导暗示:"},{"kind":"reading","text":"现在，去体会你的身体稳稳地坐在椅子里，你的双脚更沉重地踩在地面上，同时，放在你右腿上的右手也变得更加沉重。"},{"kind":"op","text":"④屏蔽声音:"},{"kind":"reading","text":"你能听到外面所有的声音，外面所有的声音都不会影响到你，都只会让你更加专注在我的声音上，引导你的手臂继续向上抬起、抬高、越抬越高。"},{"kind":"op","text":"⑤结合呼吸:"},{"kind":"reading","text":"现在结合呼吸。随着每一次吸气，你的手臂和手就会继续向上抬起，抬高，越来越高地向上抬起，越来越高，不断向上抬起,向你的面部靠近;随着每一次呼气，你的头也会逐渐低垂，去靠近你的手，头和手之间的距离在越来越近。好，做得很好!"},{"kind":"op","text":"(重复①-⑤，直到手臂抬起至一半高度)"}]},{"id":"2.6","title":"步骤 2.6 如果手臂抬起到一半高度，则完成此步骤，否则跳过","blocks":[{"kind":"op","text":"①翻转手腕:"},{"kind":"reading","text":"过一会儿，去注意你的手腕，你的手腕会开始向内、向上翻转，扭转，掌心朝向面部。不断地翻转、扭转、向内、向上，掌心转向你的面部。仿佛在掌心和面部之间有一股磁力，在相互吸引，将你的手掌拉向你的面部。好，做得很好!"},{"kind":"op","text":"②手触脸导入催眠:"},{"kind":"reading","text":"随着每一次吸气，你的手臂和手就会继续向面部靠近、拉近，越来越近。随着每一次呼气，你的头也会逐渐低垂，去靠近你的手，头和手之间的距离在越来越近。"}]},{"id":"2.7","title":"步骤 2.7 ③界定睡眠","blocks":[{"kind":"reading","text":"过一会儿，（当你的手接触到面部的时候），我会对你说“睡着”两个字，这个“睡着”并不代表像晚上一样睡着，而只是代表你闭着眼睛，身体完全放松的状态。"},{"kind":"op","text":"(重复①-③，三遍)"}]},{"id":"2.8","title":"步骤 2.8 三位一体“睡着”","blocks":[{"kind":"op","text":"（食指和中指点额头，稳稳轻轻地，在额头停留3-5秒，同时打响指，同时说“睡着”。不需要提前告知我要触碰触碰额头）"},{"kind":"op","text":"催眠师说“睡着”、打响指、同时另一只手的食指、中指轻触来访者额头(双眉之间)5秒钟。"},{"kind":"reading","text":"睡着(响指)。"}]},{"id":"2.9","title":"步骤 2.9 “催眠后暗示”。","blocks":[{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在、甚至更深的催眠状态，同时身体完全放松，更深地睡着。好，做得很好!"}]},{"id":"3","title":"步骤 3 ：手臂放落加深（步骤 3.1过一会儿，我会拿起你的手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。）","blocks":[{"kind":"reading","text":"过一会儿，我会拿起你的手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"好，完全放松（拿手），更深地睡着（将手在距离大腿10cm的高度放落到大腿上）。"},{"kind":"reading","text":"睡着！"}]},{"id":"3.2","title":"步骤 3.2 催眠后暗示","blocks":[{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在、甚至更深的催眠状态，同时身体完全放松，更深地睡着。好，做得很好!"}]},{"id":"3.3","title":"步骤 3.3 过一会儿，我会拿起你另外一只手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。","blocks":[{"kind":"reading","text":"过一会儿，我会拿起你另外一只手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"好，完全放松（拿手），更深地睡着（将手在距离大腿10cm的高度放落到大腿上）。"},{"kind":"reading","text":"睡着！"}]},{"id":"3.4","title":"步骤 3.4 催眠后暗示","blocks":[{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在、甚至更深的催眠状态，同时身体完全放松，更深地睡着。好，做得很好!"}]},{"id":"4","title":"步骤 4: 5到0加深","blocks":[{"kind":"op","text":"最常用的加深技术，在后面会讲更多的加深技术。从高到低代表意识和身体都更加放松，进入到更深的催眠状态。0则代表“睡着”的催眠状态。"},{"kind":"op","text":"人的大脑喜欢数字，这样会让一切明确化，产生安全感和可控感。"}]},{"id":"4.1","title":"步骤 4.1过一会儿，我会从5向下数到0，随着我每数一个数字，你都会加倍的放松，当我数到0时，你就会完全的放松，进入到更深的催眠状态，更深地睡着。","blocks":[{"kind":"reading","text":"过一会儿，我会从5向下数到0，随着我每数一个数字，你都会加倍的放松，当我数到0时，你就会完全的放松，进入到更深的催眠状态，更深地睡着。"}]},{"id":"4.2","title":"步骤 4.2 5➡️0","blocks":[{"kind":"reading","text":"5···加倍地放松，"},{"kind":"reading","text":"4···加倍地放松，"},{"kind":"reading","text":"3···加倍地放松，"},{"kind":"reading","text":"2···加倍地放松，"},{"kind":"reading","text":"1···加倍地放松，"},{"kind":"reading","text":"0···更深的睡着（响指）"},{"kind":"reading","text":"（没打响不用在在意，继续）"}]},{"id":"4.3","title":"步骤 4.3（含催眠后暗示）：现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，、至更深的催眠状态，同时身体完全放松，更深地睡着。","blocks":[{"kind":"reading","text":"（含催眠后暗示）：现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，、至更深的催眠状态，同时身体完全放松，更深地睡着。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"5","title":"步骤 5: 0-5唤醒（步骤 5.1好，过一会，我会从0向上数到5，随着我每数一个数字，你都会越来越清醒，当我数到5时，你就会睁开眼睛，完全清醒，感觉头脑清醒，身体轻松舒适。）","blocks":[{"kind":"reading","text":"好，过一会，我会从0向上数到5，随着我每数一个数字，你都会越来越清醒，当我数到5时，你就会睁开眼睛，完全清醒，感觉头脑清醒，身体轻松舒适。"}]},{"id":"5.2","title":"步骤 5.2","blocks":[{"kind":"reading","text":"0，更深地睡着，完全放松。"},{"kind":"reading","text":"1，越来越清醒，"},{"kind":"reading","text":"2，越来越清醒，"},{"kind":"reading","text":"3，当我数到5时，你就会睁开眼睛，完全清醒，"},{"kind":"reading","text":"4，好，做一个深呼吸，吸气，"},{"kind":"reading","text":"5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！"}]},{"id":"5.3","title":"步骤 5.3 如眼睛没睁开，就再重复。","blocks":[{"kind":"reading","text":"1、2、3、4、5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！来，伸个懒腰（双轨沟通）。"},{"kind":"op","text":"坚决唤醒，叫来访大名。"}]},{"id":"6","title":"步骤 6 目光凝视法（传统版本）","blocks":[{"kind":"op","text":"警告：年龄大、眼压高者，禁用。"},{"kind":"op","text":"说明：这是一个传统的催眠诱导技术，可以让来访者达到一个基本的催眠状态。闭上眼睛可以达到感觉剥夺（Sensory Deprivation）的目的，可以增加想像能力和对信息的接收能力，当眼睛闭上后，所有外界的视觉刺激都自动消除了。"},{"kind":"op","text":"语气放松且稳定，你让他放松，你自己首先得放松且稳定。"}]},{"id":"6.1","title":"步骤6.1 现在，将你的注意力集中在水晶球上，当你将注意力集中在水晶球时，开始做三次深呼吸，每一次呼气都加倍的放松下来。","blocks":[{"kind":"reading","text":"现在，将你的注意力集中在水晶球上，当你将注意力集中在水晶球时，开始做三次深呼吸，每一次呼气都加倍的放松下来。"}]},{"id":"6.2","title":"步骤6.2 来1: 加倍的放松；","blocks":[{"kind":"reading","text":"加倍的放松；"},{"kind":"reading","text":"加倍的放松。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"6.3","title":"步骤6.3现在，将你的注意力集中在水晶球的同时，去注意你的眼睛。你的眼睛在眨动，随着你的眼睛在眨动，你的眼皮开始变得越来越沉重。眼皮越来越沉重，眼睛眨动的次数也越来越多；眼睛眨动的次数越来越多，眼皮就越来越沉重。","blocks":[{"kind":"reading","text":"现在，将你的注意力集中在水晶球的同时，去注意你的眼睛。你的眼睛在眨动，随着你的眼睛在眨动，你的眼皮开始变得越来越沉重。眼皮越来越沉重，眼睛眨动的次数也越来越多；眼睛眨动的次数越来越多，眼皮就越来越沉重。"}]},{"id":"6.4","title":"步骤6.4过一会儿，你就可以让自己闭上眼睛（现在允许自己闭上眼睛），当你闭上眼睛的时候，你就可以进入到更深的催眠状态，更深地睡着！越来越沉，越来越沉，更深地睡着！","blocks":[{"kind":"reading","text":"过一会儿，你就可以让自己闭上眼睛（现在允许自己闭上眼睛），当你闭上眼睛的时候，你就可以进入到更深的催眠状态，更深地睡着！越来越沉，越来越沉，更深地睡着！"},{"kind":"reading","text":"睡着（响指）。"}]},{"id":"6.5","title":"步骤6.5（接催眠后暗示）：现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，、至更深的催眠状态，同时身体完全放松，更深地睡着。","blocks":[{"kind":"reading","text":"（接催眠后暗示）：现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，、至更深的催眠状态，同时身体完全放松，更深地睡着。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"7","title":"步骤7 渐进式放松技术：引导词","blocks":[{"kind":"op","text":"注意：①语速稍快一点，不要拖沓，别把人哄睡着。②不要擅自加内容：光、宗教等，大师面前不要班门弄斧。"}]},{"id":"7.1","title":"步骤 7.1 现在，将你的注意力放到你的双脚上，去体会从你的脚趾、脚背、到脚跟完全地放松，随着每一次呼吸，身体更深地放松，内心更加平静。","blocks":[{"kind":"reading","text":"现在，将你的注意力放到你的双脚上，去体会从你的脚趾、脚背、到脚跟完全地放松，随着每一次呼吸，身体更深地放松，内心更加平静。"},{"kind":"reading","text":"这股放松的感觉在向上走，到达你的小腿，小腿的肌肉在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。"},{"kind":"reading","text":"放松的感觉继续向上走，透过膝盖，到达你的大腿，大腿的肌肉在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。你能够听到周围的声音，所有这些声音都只会让你将你的注意力更好地集中在我的声音上，引导着你进入更深的放松和催眠的状态。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"7.2","title":"步骤 7.2 放松的感觉会继续向上走，从你的大腿、臀部，继续向上，到达腰部，背部，体会腰背部的肌肉在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。好，做的很好！","blocks":[{"kind":"reading","text":"放松的感觉会继续向上走，从你的大腿、臀部，继续向上，到达腰部，背部，体会腰背部的肌肉在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。好，做的很好！"},{"kind":"reading","text":"现在，去体会你的腹部，体会腹部的肌肉在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。"},{"kind":"reading","text":"现在，去注意你的胸部，体会你的呼吸更加顺畅，身体更加放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。"}]},{"id":"7.3","title":"步骤 7.3 放松的感觉继续向上传递，到达你的肩膀，从你的双肩传递到你的上臂、前臂、你的双手、每一根手指尖，所有的肌肉都在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。好，做的很好！","blocks":[{"kind":"reading","text":"放松的感觉继续向上传递，到达你的肩膀，从你的双肩传递到你的上臂、前臂、你的双手、每一根手指尖，所有的肌肉都在放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。好，做的很好！"},{"kind":"reading","text":"放松的感觉透过肩膀继续向上，到达你的颈部，继续向上从你的后脑到达你的头顶，向前到达你的额头、你的面部，去体会你全身的每一块肌肉、每一个细胞都得到了完全的放松，完全放松，随着每一次呼吸，身体更深地放松，内心更加平静。好，做的很好！"}]},{"id":"7.4","title":"步骤 7.4（5-0加深）","blocks":[{"kind":"reading","text":"过一会儿，我会从5向下数到0，随着我每数一个数字，你都会加倍的放松，当我数到0时，你就会完全的放松，进入到更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"5．．．加倍地放松、"},{"kind":"reading","text":"4．．．加倍地放松、"},{"kind":"reading","text":"3．．．加倍地放松、"},{"kind":"reading","text":"2．．．加倍地放松、"},{"kind":"reading","text":"1．．．加倍地放松、"},{"kind":"reading","text":"0．．更深的睡着（响指）"}]},{"id":"7.5","title":"步骤 7.5（催眠后暗示）从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，甚至更深的催眠状态，同时身体完全放松，更深地睡着。","blocks":[{"kind":"reading","text":"（催眠后暗示）从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，甚至更深的催眠状态，同时身体完全放松，更深地睡着。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"7.6","title":"步骤 7.6 0-5唤醒","blocks":[{"kind":"reading","text":"好，过一会，我会从0向上数到5，随着我每数一个数字，你都会越来越清醒，当我数到5时，你就会睁开眼睛，完全清醒，感觉头脑清醒，身体轻松舒适。"},{"kind":"reading","text":"0，更深地睡着，完全放松。"},{"kind":"reading","text":"1，越来越清醒，"},{"kind":"reading","text":"2，越来越清醒，"},{"kind":"reading","text":"3，当我数到5时，你就会睁开眼睛，完全清醒，"},{"kind":"reading","text":"4，好，做一个深呼吸，吸气，"},{"kind":"reading","text":"5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！"}]},{"id":"7.7","title":"步骤 7.7 眼睛没睁开，就再重复。","blocks":[{"kind":"reading","text":"1、2、3、4、5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！来，伸个懒腰（双轨沟通）。"},{"kind":"op","text":"0→5若一眨眼又闭上眼，睡了，观察呼吸，睁眼那一刻呼吸急促，那就5→0加深，反复到ta呼吸平缓（不急促），然后再0→5唤醒。最多4-5轮唤醒，0→5，0→5，0→5，0→5，0→5，坚决温柔地叫醒，最后叫大名，人容易醒过来。"}]},{"id":"8","title":"步骤8 手指分开导入（大流程3遍循环，小流程5遍循环）（步骤 8.1 手指分开&带动确认）","blocks":[{"kind":"reading","text":"现在，我会拿起你的手臂（注意，是左手）。"},{"kind":"reading","text":"将你的注意力集中在中指指尖，过一会儿，当我放开你的手臂时，你的手指会自然分开。"},{"kind":"reading","text":"手指在分开，手指间分开的距离越来越大；手指在分开，手指间分开的距离越来越大。"},{"kind":"reading","text":"随着你的手指在继续分开，去体会一下，是你的手掌还是手臂在向你的面部靠近，越来越近，越来越近，体会到了可以用语言来告诉我，是手掌还是手臂？（等待回应）"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"8.2","title":"步骤 8.2 带动&靠近","blocks":[{"kind":"op","text":"继续重复循环说引导语①-⑤句，虽然直到手指接触到面部，但是，大流程3遍循环，小流程5遍循环。"},{"kind":"reading","text":"①手指在分开，手指间分开的距离越来越大：手指在分开，手指间分开的距离越来越大。"},{"kind":"reading","text":"②现在手掌带动手臂（或手臂带动手掌）继续向你的面部靠近，越来越近，随着手指继续分开，手掌带动手臂（或手臂带动手掌）继续向你的面部靠近，越来越近。"}]},{"id":"8.3","title":"步骤 8.3 眼皮&呼吸","blocks":[{"kind":"reading","text":"③现在，注意你的眼皮，去体会眼皮会越来越沉，眼睛眨动的次数越来越多，眼睛眨动的次数越多，眼皮就会变得更加沉重，过一会儿，你就会闭上眼睛。（闭上眼睛之后，就只说眼皮越来越沉）"},{"kind":"reading","text":"④同时，注意你的呼吸，你的呼吸会越来越深，随着每一次吸气，你的手臂和手就会继续向面部靠近；随着每一次呼气，你的头也会逐渐低垂，去靠近你的手，头和手之间的距离在越来越近。"},{"kind":"reading","text":"⑤过一会儿，当你的手接触到面部的时候，我会对你说“睡着”两个字，这个“睡着”并不代表像晚上一样睡着，而只是代表你闭着眼睛，身体完全放松的状态。"},{"kind":"op","text":"观察眼睛，如果没闭上眼睛，"},{"kind":"reading","text":"来，现在允许自己闭上眼睛"}]},{"id":"8.4","title":"步骤 8.4 三位一体","blocks":[{"kind":"reading","text":"睡着（点额头，打响指）"},{"kind":"op","text":"（接催眠后暗示）"},{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，甚至更深的催眠状态，同时身体完全放松，更深地睡着。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"9","title":"步骤9 手臂放落加深：（大流程1遍，小流程1遍或3遍循环）（步骤 9.1 拿起手臂&催眠后暗示）","blocks":[{"kind":"reading","text":"过一会儿，我会拿起你的手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"好，完全放松（拿手），更深地睡着（将手在距离大腿10cm的高度放落到大腿上）。"},{"kind":"reading","text":"睡着！"},{"kind":"op","text":"催眠后暗示："},{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在、甚至更深的催眠状态，同时身体完全放松，更深地睡着。好，做得很好!"}]},{"id":"9.2","title":"步骤 9.2拿起另一只手臂&催眠后暗示","blocks":[{"kind":"reading","text":"过一会儿，我会拿起你另外一只手臂，当我拿起你手臂时，你的手臂会完全放松，同时身体也会完全放松，当我把它放落时，你的身体进入更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"好，完全放松（拿手），更深地睡着（将手在距离大腿10cm的高度放落到大腿上）。"},{"kind":"reading","text":"睡着！"},{"kind":"op","text":"催眠后暗示："},{"kind":"reading","text":"从现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在、甚至更深的催眠状态，同时身体完全放松，更深地睡着。好，做得很好!"}]},{"id":"10","title":"步骤10 ：5到0加深技术","blocks":[{"kind":"op","text":"最常用的加深技术，在后面会讲更多的加深技术。从高到低代表意识和身体都更加放松，进入到更深的催眠状态。0则代表“睡着”的催眠状态。"},{"kind":"op","text":"人的大脑喜欢数字，这样会让一切明确化，产生安全感和可控感。"}]},{"id":"10.1","title":"步骤10.1 从5向下数到0","blocks":[{"kind":"reading","text":"过一会儿，我会从5向下数到0，随着我每数一个数字，你都会加倍的放松，当我数到0时，你就会完全的放松，进入到更深的催眠状态，更深地睡着。"},{"kind":"reading","text":"5···加倍地放松，"},{"kind":"reading","text":"4···加倍地放松，"},{"kind":"reading","text":"3···加倍地放松，"},{"kind":"reading","text":"2···加倍地放松，"},{"kind":"reading","text":"1···加倍地放松，"},{"kind":"reading","text":"0···更深的睡着（响指）"},{"kind":"reading","text":"（没打响不用在在意，继续）"},{"kind":"reading","text":"（含催眠后暗示）：现在起每一次，我对你说“睡着”两个字，在经你允许为你做催眠时，你都会迅速平静地进入到现在，、至更深的催眠状态，同时身体完全放松，更深地睡着。"},{"kind":"reading","text":"好，做的很好！"}]},{"id":"11","title":"步骤11: 0-5唤醒（步骤11.1 从0向上数到5）","blocks":[{"kind":"reading","text":"好，过一会，我会从0向上数到5，随着我每数一个数字，你都会越来越清醒，当我数到5时，你就会睁开眼睛，完全清醒，感觉头脑清醒，身体轻松舒适。"},{"kind":"reading","text":"0，更深地睡着，完全放松。"},{"kind":"reading","text":"1，越来越清醒，"},{"kind":"reading","text":"2，越来越清醒，"},{"kind":"reading","text":"3，当我数到5时，你就会睁开眼睛，完全清醒，"},{"kind":"reading","text":"4，好，做一个深呼吸，吸气，"},{"kind":"reading","text":"5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！"}]},{"id":"11.2","title":"步骤11.2 眼睛没睁开，就再重复。","blocks":[{"kind":"reading","text":"1、2、3、4、5，睁开眼睛，完全清醒，头脑清醒，身体轻松舒适。好，做的很好！来，伸个懒腰（双轨沟通）。"},{"kind":"op","text":"说明："},{"kind":"op","text":"0→5若一眨眼又闭上眼，睡了，观察呼吸，睁眼那一刻呼吸急促，那就5→0加深，反复到ta呼吸平缓（不急促），然后再0→5唤醒。最多4-5轮唤醒，0→5，0→5，0→5，0→5，0→5，坚决温柔地叫醒，最后叫大名，人容易醒过来。"},{"kind":"op","text":"最后：起来喝口水，想睡觉回家睡，催眠室不是睡觉的地方。"}]},{"id":"__q_bdc-post","title":"伯恩斯 BDC 量表（催眠后）","blocks":[],"pseudo":"questionnaire:bdcPost"},{"id":"__q_bai-post","title":"伯恩斯 BAI 量表（催眠后）","blocks":[],"pseudo":"questionnaire:baiPost"},{"id":"__state_post","title":"催眠后：来访者状态复测","blocks":[],"pseudo":"state:post"},{"id":"__comparison","title":"催眠前后评分对比","blocks":[],"pseudo":"comparison"}],"questionnaires":{"questionnaire1":{"id":"table-1","title":"暗示感受性问卷（一）","items":[{"id":"table-1-q1","text":"你在成年后是否梦游过?","options":["是","否"]},{"id":"table-1-q2","text":"你在十几岁时，如果向父母表达你的感受，你会感觉自然吗?","options":["是","否"]},{"id":"table-1-q3","text":"当你与别人讨论有趣的话题时，你会直接看着对方的眼睛，或者靠近对方吗?","options":["是","否"]},{"id":"table-1-q4","text":"你是否认为，对大多数人而言，当他们第一次见到你时，他们并不会太在意你的外表?","options":["是","否"]},{"id":"table-1-q5","text":"当你第一次参加一个团体活动，你是否会很自然地主动开始交谈，将别人的注意力吸引到你身上来?","options":["是","否"]},{"id":"table-1-q6","text":"如果在别人面前和恋人(配偶)牵手或拥抱，你是否感觉很自然?","options":["是","否"]},{"id":"table-1-q7","text":"当别人说感觉暖和时，你也会开始觉得暖和吗?","options":["是","否"]},{"id":"table-1-q8","text":"在别人与你谈话时，你是否会因为忙于思考自己应该说什么，而没有听清对方在讲什么?","options":["是","否"]},{"id":"table-1-q9","text":"你是否感到通过视觉比通过听觉能更好地学习和领会要学习的东西?","options":["是","否"]},{"id":"table-1-q10","text":"在新的班级里或听报告时，你是否可以很自然地当众提问?","options":["是","否"]},{"id":"table-1-q11","text":"当表述你的想法时，你是否觉得需要将与之有关的所有细节都叙述清楚，才能让对方完全理解?","options":["是","否"]},{"id":"table-1-q12","text":"你喜欢和小孩在一起玩吗?","options":["是","否"]},{"id":"table-1-q13","text":"即使是在陌生人群与环境当中，你也能轻松做到让自己的身体运动自然随意?","options":["是","否"]},{"id":"table-1-q14","text":"你更愿意读小说，而不是非小说类的作品?","options":["是","否"]},{"id":"table-1-q15","text":"如果让你想象一下，你正在咬一个又酸、又涩、又多汁的橙子，你嘴里会产生口水吗?","options":["是","否"]},{"id":"table-1-q16","text":"如果你工作出色应当得到表扬，当你确实被当众表扬时，你会感觉自然吗?","options":["是","否"]},{"id":"table-1-q17","text":"你感觉自己是一个健谈的人吗?","options":["是","否"]},{"id":"table-1-q18","text":"当别人赞美你的体形或外表时，你会感觉自然吗?","options":["是","否"]}],"scoreOptions":false,"needsReadAloud":false,"showsIntro":true,"allowsSkip":true,"scoring":{"yesScore":{"1":10,"2":10},"default":5}},"questionnaire2":{"id":"table-2","title":"暗示感受性问卷（二）","items":[{"id":"table-2-q1","text":"你是否曾经在半夜突然醒来，感到身体不能动也/或不能说话?","options":["是","否"]},{"id":"table-2-q2","text":"孩童时，与父母说话的实际内容相比，你是否感觉更易受他们音调语气的影响?","options":["是","否"]},{"id":"table-2-q3","text":"当某个熟人谈起一种你所体验过的恐惧时，你是否往往也会有害怕或不安的感觉?","options":["是","否"]},{"id":"table-2-q4","text":"与人争论过后，你是否还会细想自己当时本该说什么或可以怎样说?","options":["是","否"]},{"id":"table-2-q5","text":"在他人与你谈话时，你是否会因为想起毫不相关的事儿而偶尔走神儿，以至于没有听到对方在说什么?","options":["是","否"]},{"id":"table-2-q6","text":"你是否有时渴望因工作出色而受到表扬，但被表扬时却感到尴尬或不自在?","options":["是","否"]},{"id":"table-2-q7","text":"你是否常会担心或害怕不能与初次见面的人顺利交谈?","options":["是","否"]},{"id":"table-2-q8","text":"当别人关注你的身体或外表时，你会感觉到尴尬吗?","options":["是","否"]},{"id":"table-2-q9","text":"如果可以选择的话，你是否会在大部分时间里避免与儿童在一起?","options":["是","否"]},{"id":"table-2-q10","text":"你是否感觉身体动作不够轻松随意，尤其是在陌生人群与环境中?","options":["是","否"]},{"id":"table-2-q11","text":"与小说相比，你是否更愿意阅读非小说类作品?","options":["是","否"]},{"id":"table-2-q12","text":"如果有人描述很苦的味道时，你是否感觉难以体验那种感受?","options":["是","否"]},{"id":"table-2-q13","text":"一般来说，你是否总感觉自己眼中的自己不如别人眼中的你?","options":["是","否"]},{"id":"table-2-q14","text":"在其他人面前，你与恋人或配偶牵手、拥抱时是否常会感到尴尬或难为情?","options":["是","否"]},{"id":"table-2-q15","text":"在新的班级里或听演讲的场合，在你很希望听到进一步的解释而当众提问时，你是否也会感觉不自然?","options":["是","否"]},{"id":"table-2-q16","text":"与人初次见面，尤其是在谈论关于你的话题时，如果对方说话时直视你的眼睛，你是否会感觉不自然?","options":["是","否"]},{"id":"table-2-q17","text":"与众人刚见面时，当你开始一个话题而引起了大家的注意，这时你是否会感觉不自然?","options":["是","否"]},{"id":"table-2-q18","text":"如果你正在恋爱，或与某人关系亲密，你是否会觉得难以通过语言表达你的爱意?","options":["是","否"]}],"scoreOptions":false,"needsReadAloud":false,"showsIntro":true,"allowsSkip":true,"scoring":{"yesScore":{"1":10,"2":10},"default":5}},"bdcPre":{"id":"bdc-pre","title":"伯恩斯 BDC 量表（催眠前）","items":[{"id":"bdc-pre-q1","text":"悲伤：你觉得悲伤或泄气吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-pre-q2","text":"沮丧感：觉得前途渺茫吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-pre-q3","text":"自我评价低：你觉得内疚，自己没用或低人一等吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-pre-q4","text":"兴趣缺乏：你对工作、爱好、家庭或朋友不感兴趣吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-pre-q5","text":"自杀冲动：你觉得活着没有意义或不如死了好？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]}],"scoreOptions":true,"needsReadAloud":true,"showsIntro":true,"allowsSkip":true},"baiPre":{"id":"bai-pre","title":"伯恩斯 BAI 量表（催眠前）","items":[{"id":"bai-pre-q1","text":"感到焦虑，紧张，担心，惊慌，害怕","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-pre-q2","text":"感到紧绷，疲乏或无法放松","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-pre-q3","text":"感到压力、烦躁、或濒临崩溃","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-pre-q4","text":"令人恐惧的幻想或让自己害怕的想法，幻想","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-pre-q5","text":"躯体感到紧张，例如僵硬，肌肉紧张，呼吸急促或心跳过速","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]}],"scoreOptions":true,"needsReadAloud":true,"showsIntro":true,"allowsSkip":true},"suggestibilityCheck":{"id":"suggestibility-check","title":"暗示感受性问题（是 / 否）","items":[{"id":"suggestibility-check-q1","text":"你曾经梦游过或说过梦话吗?","options":["是","否"]},{"id":"suggestibility-check-q2","text":"你曾在晚上醒来，感觉自己不能动或不能说话吗?","options":["是","否"]},{"id":"suggestibility-check-q3","text":"与人争论后，有想过自己当时本来可以说或应该说什么吗?","options":["是","否"]},{"id":"suggestibility-check-q4","text":"如果要你想象去咬一个酸柠檬，你嘴里会流口水吗?","options":["是","否"]},{"id":"suggestibility-check-q5","text":"如果让你想象一个东西的样子，你可以想得出来吗?","options":["是","否"]}],"scoreOptions":false,"needsReadAloud":false,"showsIntro":false,"allowsSkip":false},"bdcPost":{"id":"bdc-post","title":"伯恩斯 BDC 量表（催眠后）","items":[{"id":"bdc-post-q1","text":"悲伤：你觉得悲伤或泄气吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-post-q2","text":"沮丧感：觉得前途渺茫吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-post-q3","text":"自我评价低：你觉得内疚，自己没用或低人一等吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-post-q4","text":"兴趣缺乏：你对工作、爱好、家庭或朋友不感兴趣吗？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bdc-post-q5","text":"自杀冲动：你觉得活着没有意义或不如死了好？","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]}],"scoreOptions":true,"needsReadAloud":true,"showsIntro":true,"allowsSkip":true},"baiPost":{"id":"bai-post","title":"伯恩斯 BAI 量表（催眠后）","items":[{"id":"bai-post-q1","text":"感到焦虑，紧张，担心，惊慌，害怕","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-post-q2","text":"感到紧绷，疲乏或无法放松","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-post-q3","text":"感到压力、烦躁、或濒临崩溃","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-post-q4","text":"令人恐惧的幻想或让自己害怕的想法，幻想","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]},{"id":"bai-post-q5","text":"躯体感到紧张，例如僵硬，肌肉紧张，呼吸急促或心跳过速","options":["0 · 无","1 · 轻度","2 · 中度","3 · 重度"]}],"scoreOptions":true,"needsReadAloud":true,"showsIntro":true,"allowsSkip":true}},"stateForm":{"emotionOptions":["焦虑","紧张","悲伤","愤怒","恐惧","其他"],"bodyOptions":["胃部","腹部","头部","肩膀","眼睛","胸口","其他"],"maxRounds":3,"scale":[0,10]}};
+/* ===== src/core/normalize.js ===== */
+/* 文本归一化：去空格 → 删括号对及内容 → 去中英标点 → 小写 */
+var Normalize = (function () {
+  var PUNCT = /[\s，。、；：？！“”‘’…—·~～\[\]【】《》〈〉"'’,.;:!?()（）•・→➡️①②③④⑤]/g;
+
+  function stripBrackets(s) {
+    var prev = null;
+    while (prev !== s) {
+      prev = s;
+      s = s.replace(/（[^（）]*）/g, '').replace(/\([^()]*\)/g, '');
+    }
+    return s;
+  }
+
+  function norm(s) {
+    if (!s) return '';
+    s = stripBrackets(s);
+    s = s.replace(PUNCT, '');
+    return s.toLowerCase();
+  }
+
+  return { norm: norm };
+})();
+
+
+/* ===== src/core/coverage.js ===== */
+/*
+ * 覆盖率算法：有序分块指针匹配（ordered chunk-pointer with bigram similarity）
+ * - 输入 sentences: [{ idx, text }]（与分页引擎同源，一句 = 一个 chunk）
+ * - cursor 只前进：识别文本能覆盖当前窗口 [cursor, cursor+2] 内某 chunk 即推进
+ *   （有序 → 后文不能伪标前文；增量 → 暂停/重启天然不清零）
+ * - 匹配条件：chunk 的 bigram 对识别全文的包含率 ≥ 0.8，
+ *   或 chunk 与识别文本尾部（近140字）的 Dice 系数 ≥ 0.55（容忍同音字/局部插入）
+ */
+var Coverage = (function (N) {
+
+  function bigrams(s) {
+    var m = {};
+    for (var i = 0; i + 1 < s.length; i++) {
+      var b = s.substr(i, 2);
+      m[b] = (m[b] || 0) + 1;
+    }
+    return m;
+  }
+
+  function containment(bigA, bigB) { // |A∩B| / |A|
+    var hit = 0, total = 0;
+    for (var k in bigA) { total += bigA[k]; hit += Math.min(bigA[k], bigB[k] || 0); }
+    return total ? hit / total : 0;
+  }
+
+  function dice(bigA, bigB) {
+    var inter = 0, a = 0, b = 0, k;
+    for (k in bigA) { a += bigA[k]; inter += Math.min(bigA[k], bigB[k] || 0); }
+    for (k in bigB) { b += bigB[k]; }
+    return (a + b) ? (2 * inter / (a + b)) : 0;
+  }
+
+  // 字符多重集包含率：识别文本能覆盖 chunk 多少比例的字符（容忍漏字/同音字）
+  function charContain(norm, text) {
+    if (!norm) return 0;
+    var cnt = {}, i;
+    for (i = 0; i < text.length; i++) cnt[text[i]] = (cnt[text[i]] || 0) + 1;
+    var hit = 0;
+    for (i = 0; i < norm.length; i++) {
+      if (cnt[norm[i]] > 0) { cnt[norm[i]]--; hit++; }
+    }
+    return hit / norm.length;
+  }
+
+  function Tracker(sentences) { // sentences: [{idx, text}]，text 为原文
+    var self = this;
+    this.chunks = [];
+    this.cursor = 0;
+    this.coveredChars = 0;
+    this.sentenceCount = sentences.length;
+    sentences.forEach(function (s) {
+      var n = N.norm(s.text);
+      self.chunks.push({ senIdx: s.idx, norm: n, bigrams: n ? bigrams(n) : null, len: n.length });
+    });
+    this.totalChars = this.chunks.reduce(function (a, c) { return a + c.len; }, 0);
+  }
+
+  Tracker.prototype.feed = function (cumulativeText) {
+    var text = N.norm(cumulativeText || '');
+    if (!text || !this.totalChars) return this.progress();
+    var bigText = bigrams(text);
+    var tail = text.length > 140 ? text.slice(-140) : text;
+    var bigTail = bigrams(tail);
+    var guard = 0;
+    while (guard++ < 5) {
+      var matched = false;
+      for (var w = 0; w < 3 && this.cursor + w < this.chunks.length; w++) {
+        var c = this.chunks[this.cursor + w];
+        if (!c.bigrams || !c.len) { // 空句（纯括号/标点）直接跳过
+          if (this.cursor + w === this.cursor) { this.cursor = this.cursor + w + 1; matched = true; }
+          continue;
+        }
+        if (containment(c.bigrams, bigText) >= 0.8 ||
+            charContain(c.norm, text) >= 0.75 ||
+            dice(c.bigrams, bigTail) >= 0.55) {
+          this.coveredChars += c.len;
+          this.cursor = this.cursor + w + 1;
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) break;
+    }
+    return this.progress();
+  };
+
+  Tracker.prototype.progress = function () {
+    return this.totalChars ? this.coveredChars / this.totalChars : 0;
+  };
+
+  Tracker.prototype.doneAll = function () { return this.cursor >= this.chunks.length; };
+
+  // 当前应朗读到的句子 idx（用于卡拉OK高亮）
+  Tracker.prototype.currentSentence = function () {
+    var c = this.chunks[Math.min(this.cursor, this.chunks.length - 1)];
+    return c ? c.senIdx : 0;
+  };
+
+  return { Tracker: Tracker };
+})(Normalize);
+
+
+/* ===== src/core/pager.js ===== */
+/*
+ * 动态分页引擎：句子级测量式分页（无内部滚动约束）
+ * 把句子逐个放入与真实内容区同尺寸/同样式的隐形测量层，
+ * scrollHeight 溢出即切屏。fonts.ready / resize 后由调用方重算。
+ */
+var Pager = (function () {
+
+  /*
+   * paginate(sentences, mount, maxH)
+   *  - sentences: [{ idx, text }]
+   *  - mount(nodeFactory): 调用方提供「创建隐形测量节点」的函数，
+   *    返回已插入 DOM（与内容区同宽同字体）的元素
+   *  - maxH: 内容区可用高度（px）
+   * 返回 screens: [{ from, to }]（句子 idx 闭区间）
+   */
+  function paginate(sentences, mount, maxH) {
+    var el = mount();
+    var screens = [];
+    var start = 0;
+    var count = 0;
+    for (var i = 0; i < sentences.length; i++) {
+      var span = document.createElement('span');
+      span.className = 'sentence';
+      span.textContent = sentences[i].text;
+      el.appendChild(span);
+      count++;
+      if (el.scrollHeight > maxH && count > 1) {
+        el.removeChild(el.lastChild);
+        screens.push({ from: start, to: sentences[i - 1].idx });
+        el.innerHTML = '';
+        el.appendChild(span);
+        start = sentences[i].idx;
+        count = 1;
+      }
+    }
+    if (start <= sentences[sentences.length - 1].idx) {
+      screens.push({ from: start, to: sentences[sentences.length - 1].idx });
+    }
+    if (el && el.parentNode) el.parentNode.removeChild(el);
+    return screens;
+  }
+
+  return { paginate: paginate };
+})();
+
+
+/* ===== src/core/store.js ===== */
+/* localStorage 会话仓库：会话列表 + 进行中快照 */
+var Store = (function () {
+  var SKEY = 'hyp_sessions_v1';
+  var CKEY = 'hyp_current_v1';
+  var MAX = 50;
+
+  function read(k, d) {
+    try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }
+    catch (e) { return d; }
+  }
+  function write(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); return true; }
+    catch (e) { return false; }
+  }
+
+  return {
+    list: function () { return read(SKEY, []); },
+    save: function (s) {
+      var a = read(SKEY, []);
+      var i = -1;
+      for (var j = 0; j < a.length; j++) if (a[j].id === s.id) { i = j; break; }
+      if (i >= 0) a[i] = s; else a.unshift(s);
+      if (a.length > MAX) a = a.slice(0, MAX);
+      write(SKEY, a);
+    },
+    get: function (id) {
+      var a = read(SKEY, []);
+      for (var i = 0; i < a.length; i++) if (a[i].id === id) return a[i];
+      return null;
+    },
+    remove: function (id) {
+      var a = read(SKEY, []).filter(function (x) { return x.id !== id; });
+      write(SKEY, a);
+    },
+    snapshot: function (s) { write(CKEY, s); },
+    loadSnapshot: function () { return read(CKEY, null); },
+    clearSnapshot: function () { try { localStorage.removeItem(CKEY); } catch (e) {} }
+  };
+})();
+
+
+/* ===== src/core/asr.js ===== */
+/*
+ * Web Speech API 封装
+ * - 微信内置浏览器（MicroMessenger）直接降级：实例可建但 onresult 永不触发
+ * - continuous=false + interimResults=true + onend 自动重启（比 Safari 的 continuous 稳）
+ * - 识别会话与「朗读进度」解耦：进度由调用方的 Coverage.Tracker 持有，重启不触碰
+ * - watchdog：watchdogMs 无任何识别结果 → 阶梯重启；连续失败超限 → 永久降级手动
+ * - 不录音、不保存音频；识别文本仅存内存缓冲，朗读单元结束即弃
+ */
+var ASR = (function () {
+
+  function isWeChat() { return /MicroMessenger/i.test(navigator.userAgent); }
+  function srClass() { return window.SpeechRecognition || window.webkitSpeechRecognition || null; }
+  function supported() { return !!srClass(); }
+  function available() { return supported() && !isWeChat(); }
+
+  function Manager(opts) {
+    this.opts = opts || {}; // { lang, onResult(cumText), onStatus(s), onDegrade(reason) }
+    this.SR = srClass();
+    this.active = false;
+    this.degraded = false;
+    this.baseFinal = '';   // 已结束识别会话的最终文本累计
+    this.sessionFinal = '';
+    this.rec = null;
+    this.lastResultTs = 0;
+    this.startedAt = 0;
+    this.failStreak = 0;
+    this.watchdogTimer = null;
+    this.restartTimer = null;
+  }
+
+  Manager.prototype._emit = function (status) {
+    if (this.opts.onStatus) this.opts.onStatus(status);
+  };
+
+  Manager.prototype._cum = function (finals, interim) {
+    return this.baseFinal + finals + (interim || '');
+  };
+
+  Manager.prototype._create = function () {
+    var self = this;
+    var r = new this.SR();
+    r.continuous = false;
+    r.interimResults = true;
+    r.lang = this.opts.lang || 'zh-CN';
+    r.onresult = function (e) {
+      self.lastResultTs = Date.now();
+      self.failStreak = 0;
+      var finals = '', interim = '';
+      for (var i = 0; i < e.results.length; i++) {
+        var t = e.results[i][0].transcript || '';
+        if (e.results[i].isFinal) finals += t; else interim += t;
+      }
+      self.sessionFinal = finals;
+      self._emit('listening');
+      if (self.opts.onResult) self.opts.onResult(self._cum(finals, interim));
+    };
+    r.onerror = function (e) {
+      if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+        self._degrade('麦克风权限被拒绝');
+      }
+    };
+    r.onend = function () {
+      if (!self.active || self.degraded) return;
+      self.baseFinal += self.sessionFinal;
+      self.sessionFinal = '';
+      self._restartSoon(250);
+    };
+    return r;
+  };
+
+  Manager.prototype._restartSoon = function (delay) {
+    var self = this;
+    if (this.restartTimer) clearTimeout(this.restartTimer);
+    this.restartTimer = setTimeout(function () {
+      if (!self.active || self.degraded) return;
+      self._spawn();
+    }, delay || 250);
+  };
+
+  Manager.prototype._spawn = function () {
+    var self = this;
+    if (!this.active || this.degraded) return;
+    try {
+      this.rec = this._create();
+      this.rec.start();
+      this._emit('listening');
+    } catch (e) {
+      this._restartSoon(600);
+    }
+  };
+
+  Manager.prototype._degrade = function (reason) {
+    if (this.degraded) return;
+    this.degraded = true;
+    this.active = false;
+    this._teardown();
+    this._emit('off');
+    if (this.opts.onDegrade) this.opts.onDegrade(reason);
+  };
+
+  Manager.prototype._teardown = function () {
+    if (this.watchdogTimer) { clearInterval(this.watchdogTimer); this.watchdogTimer = null; }
+    if (this.restartTimer) { clearTimeout(this.restartTimer); this.restartTimer = null; }
+    if (this.rec) {
+      try { this.rec.onresult = null; this.rec.onend = null; this.rec.onerror = null; this.rec.stop(); } catch (e) {}
+      this.rec = null;
+    }
+  };
+
+  Manager.prototype._watchdog = function () {
+    var self = this;
+    var ms = this.opts.watchdogMs || 6000;
+    this.watchdogTimer = setInterval(function () {
+      if (!self.active || self.degraded) return;
+      var idle = Date.now() - (self.lastResultTs || self.startedAt);
+      if (idle > ms) {
+        self.failStreak++;
+        if (self.failStreak > 4) { self._degrade('识别持续无响应'); return; }
+        var ladder = [300, 1000, 2000, 3500];
+        var d = ladder[Math.min(self.failStreak - 1, ladder.length - 1)];
+        if (self.rec) { try { self.rec.onend = null; self.rec.stop(); } catch (e) {} }
+        self._restartSoon(d);
+      }
+    }, 2000);
+  };
+
+  // 开始一次朗读识别（进度累计归零由调用方通过新建 Tracker 完成）
+  Manager.prototype.start = function () {
+    if (this.degraded || !available()) return false;
+    this.stop();
+    this.active = true;
+    this.baseFinal = '';
+    this.sessionFinal = '';
+    this.lastResultTs = 0;
+    this.startedAt = Date.now();
+    this.failStreak = 0;
+    this._spawn();
+    this._watchdog();
+    return true;
+  };
+
+  // 暂停（保留已识别文本，不归零调用方进度）
+  Manager.prototype.pause = function () {
+    if (this.rec) {
+      this.baseFinal += this.sessionFinal;
+      this.sessionFinal = '';
+    }
+    this.active = false;
+    this._teardown();
+    this._emit('paused');
+  };
+
+  // 恢复（保留 baseFinal 继续累计）
+  Manager.prototype.resume = function () {
+    if (this.degraded || this.active) return !!this.active;
+    this.active = true;
+    this.startedAt = Date.now();
+    this._spawn();
+    this._watchdog();
+    return true;
+  };
+
+  Manager.prototype.stop = function () {
+    this.active = false;
+    this._teardown();
+  };
+
+  Manager.prototype.reset = function () { // 朗读单元切换：清空识别文本
+    this.baseFinal = '';
+    this.sessionFinal = '';
+  };
+
+  // 麦克风权限预热：在用户手势中调用，避免进入朗读页才弹权限
+  function warmup(cb) {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(function (s) {
+        s.getTracks().forEach(function (t) { t.stop(); });
+        cb && cb(true);
+      }).catch(function () { cb && cb(false); });
+    } else {
+      cb && cb(null);
+    }
+  }
+
+  return {
+    isWeChat: isWeChat,
+    supported: supported,
+    available: available,
+    warmup: warmup,
+    Manager: Manager
+  };
+})();
+
+
+/* ===== src/core/csv.js ===== */
+/* CSV 生成与导出（BOM + UTF-8 + CRLF，Excel 直开无乱码；微信内降级为复制） */
+var CSV = (function () {
+
+  function esc(v) {
+    v = (v === null || v === undefined) ? '' : String(v);
+    return '"' + v.replace(/"/g, '""') + '"';
+  }
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  function fmtTs(ts) {
+    if (!ts) return '';
+    var d = new Date(ts);
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) +
+      ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  }
+
+  function build(session, scores) {
+    var rows = [];
+    rows.push(['会话编号', '开始时间', '流程名称', '受访者姓名', '催眠目标',
+      '步骤/分组', '问题', '答案类型', '答案', '记录时间']);
+    (session.records || []).forEach(function (r) {
+      rows.push([session.id, fmtTs(session.startTime), session.flowTitle,
+        session.clientName || '', session.goal || '', r.group || '', r.question || '',
+        r.answerType || '', (r.answer === null || r.answer === undefined) ? '' : String(r.answer),
+        fmtTs(r.ts || session.startTime)]);
+    });
+    if (scores) {
+      rows.push([]);
+      rows.push(['汇总']);
+      var s = scores;
+      rows.push(['问卷得分', '暗示感受性问卷(一)', '', '分数', s.q1 === null ? '跳过' : s.q1]);
+      rows.push(['问卷得分', '暗示感受性问卷(二)', '', '分数', s.q2 === null ? '跳过' : s.q2]);
+      if (s.qTotal !== null) {
+        rows.push(['问卷得分', '暗示感受性总分', '', '分数', s.qTotal]);
+        rows.push(['问卷结果', '躯体型暗示感受性', '', '比例', Math.round(s.somaticPct * 100) + '%']);
+        rows.push(['问卷结果', '情绪型暗示感受性', '', '比例', Math.round(s.emotionalPct * 100) + '%']);
+      }
+      [['BDC 量表总分', s.bdc], ['BAI 量表总分', s.bai],
+       ['情绪状态评分合计', s.state && s.state.emotion], ['身体状态评分合计', s.state && s.state.body]
+      ].forEach(function (pair) {
+        var v = pair[1] || {};
+        rows.push(['前后对比', pair[0], '', '催眠前', v.pre === null || v.pre === undefined ? '跳过' : v.pre,
+          '催眠后', v.post === null || v.post === undefined ? '跳过' : v.post,
+          '差异(后-前)', v.delta === null || v.delta === undefined ? '' : v.delta]);
+      });
+      (s.stateDetails || []).forEach(function (d) {
+        rows.push(['状态明细', d.phase === 'pre' ? '催眠前' : '催眠后', d.domain === 'emotion' ? '情绪状态' : '身体状态',
+          '第' + d.round + '轮', d.text]);
+      });
+    }
+    return '\uFEFF' + rows.map(function (r) { return r.map(esc).join(','); }).join('\r\n');
+  }
+
+  function isWeChat() { return /MicroMessenger/i.test(navigator.userAgent); }
+
+  function download(name, csv, fallbackContainer) {
+    if (!isWeChat()) {
+      try {
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+        return true;
+      } catch (e) { /* fallthrough */ }
+    }
+    // 微信内 / 下载失败：弹 textarea 长按复制
+    if (fallbackContainer) {
+      fallbackContainer.innerHTML = '';
+      var tip = document.createElement('p');
+      tip.className = 'q-hint';
+      tip.textContent = '当前环境不支持直接下载，请长按下方文本全选复制，粘贴到备忘录/电脑后保存为 .csv（Excel 可直接打开）：';
+      var ta = document.createElement('textarea');
+      ta.className = 'csv-fallback';
+      ta.readOnly = true;
+      ta.value = csv;
+      fallbackContainer.appendChild(tip);
+      fallbackContainer.appendChild(ta);
+      return false;
+    }
+    return false;
+  }
+
+  return { build: build, download: download };
+})();
+
+
+/* ===== src/app.js ===== */
+/*
+ * 催眠流程引导 · 主应用
+ * 单元线性化 → 游标状态机 → 各类型屏渲染 → ASR/覆盖率自动翻页 → 会话与导出
+ */
+(function () {
+  var FLOW = window.__FLOW__;
+  if (!FLOW) { document.body.innerHTML = '数据加载失败'; return; }
+
+  // ================= 工具 =================
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  function fmtTime(ts) {
+    var d = new Date(ts), p = function (n) { return (n < 10 ? '0' : '') + n; };
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
+  function toast(msg) {
+    var t = el('div', '', msg);
+    t.style.cssText = 'position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:rgba(40,40,40,.85);color:#fff;font-size:14px;padding:9px 18px;border-radius:20px;z-index:99;max-width:80%;text-align:center;';
+    document.body.appendChild(t);
+    setTimeout(function () { t.remove(); }, 2200);
+  }
+
+  // ================= 流程线性化 =================
+  var splitSentences = (function () {
+    function split(t) {
+      var out = [], buf = '';
+      for (var i = 0; i < t.length; i++) {
+        buf += t[i];
+        if ('。！？!?；'.indexOf(t[i]) >= 0) { out.push(buf); buf = ''; }
+      }
+      if (buf) out.push(buf);
+      var fin = [];
+      out.forEach(function (s) {
+        if (s.length <= 60) { fin.push(s); return; }
+        var b = '';
+        for (var j = 0; j < s.length; j++) {
+          b += s[j];
+          if ('，；,;'.indexOf(s[j]) >= 0 && b.length >= 30) { fin.push(b); b = ''; }
+        }
+        if (b) fin.push(b);
+      });
+      return fin;
+    }
+    return function (texts) {
+      var sents = [];
+      texts.forEach(function (t) { split(t).forEach(function (x) { sents.push({ text: x }); }); });
+      if (!sents.length) sents.push({ text: '' });
+      sents.forEach(function (s, i) { s.idx = i; });
+      return sents;
+    };
+  })();
+
+  var UNITS = (function () {
+    var units = [{ type: 'intro', id: 'intro', step: '开始' }];
+    FLOW.steps.forEach(function (step) {
+      if (step.pseudo) {
+        if (step.pseudo.indexOf('questionnaire:') === 0) {
+          var key = step.pseudo.split(':')[1];
+          var q = FLOW.questionnaires[key];
+          if (q.showsIntro) units.push({ type: 'qintro', id: 'qi_' + q.id, qid: key, step: step.title });
+          q.items.forEach(function (item, i) {
+            units.push({ type: 'question', id: q.id + '-' + (i + 1), qid: key, item: item, index: i, step: step.title });
+          });
+        } else if (step.pseudo === 'qresult') {
+          units.push({ type: 'qresult', id: 'qresult', step: step.title });
+        } else if (step.pseudo === 'state:pre' || step.pseudo === 'state:post') {
+          var phase = step.pseudo.split(':')[1];
+          for (var r = 1; r <= FLOW.stateForm.maxRounds; r++) {
+            units.push({ type: 'stateround', id: 'state_' + phase + '_e' + r, phase: phase, domain: 'emotion', round: r, step: step.title });
+            units.push({ type: 'stateround', id: 'state_' + phase + '_b' + r, phase: phase, domain: 'body', round: r, step: step.title });
+          }
+        } else if (step.pseudo === 'comparison') {
+          units.push({ type: 'comparison', id: 'comparison', step: step.title });
+        }
+        return;
+      }
+      var groups = [];
+      (step.blocks || []).forEach(function (b) {
+        var last = groups[groups.length - 1];
+        if (last && last.kind === b.kind) last.texts.push(b.text);
+        else groups.push({ kind: b.kind, texts: [b.text] });
+      });
+      if (!groups.length) groups.push({ kind: 'op', texts: [] });
+      groups.forEach(function (g, gi) {
+        var id = step.id + (groups.length > 1 ? '-' + (gi + 1) : '');
+        units.push({ type: g.kind === 'op' ? 'op' : 'reading', id: id, step: step.title, texts: g.texts });
+      });
+    });
+    return units;
+  })();
+
+  // ================= 应用状态 =================
+  var app = {
+    view: 'home',          // home | run | records | detail | done
+    unitIndex: 0,
+    screenIndex: 0,
+    session: null,
+    manager: null,         // ASR Manager
+    tracker: null,         // Coverage Tracker（当前朗读单元）
+    asrDegraded: false,
+    userPaused: false,
+    opTimer: null,
+    voiceTimer: null,
+    detailId: null
+  };
+
+  var V = FLOW.voice;
+
+  // ================= 会话与记录 =================
+  function newSession() {
+    return {
+      id: 'S' + (function () {
+        var d = new Date(), p = function (n) { return (n < 10 ? '0' : '') + n; };
+        return '' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' + p(d.getHours()) + p(d.getMinutes()) + '-' + Math.random().toString(36).slice(2, 6);
+      })(),
+      flowTitle: FLOW.meta.title,
+      clientName: '', goal: '',
+      startTime: Date.now(), endTime: null, status: 'running',
+      answers: {}, records: []
+    };
+  }
+
+  function setRecord(unitId, group, question, answerType, answer) {
+    var s = app.session;
+    for (var i = 0; i < s.records.length; i++) {
+      if (s.records[i].unitId === unitId) { s.records[i].group = group; s.records[i].question = question; s.records[i].answerType = answerType; s.records[i].answer = answer; s.records[i].ts = Date.now(); return; }
+    }
+    s.records.push({ unitId: unitId, group: group, question: question, answerType: answerType, answer: answer, ts: Date.now() });
+  }
+
+  function saveSession() { if (app.session) Store.save(app.session); }
+
+  function snapshot() {
+    if (app.session && app.session.status === 'running') {
+      Store.snapshot({ session: app.session, unitIndex: app.unitIndex });
+    }
+  }
+
+  // ================= 计分 =================
+  function computeScores(session) {
+    var a = session.answers || {};
+    function qScore(key) {
+      var q = FLOW.questionnaires[key], total = null;
+      q.items.forEach(function (item, i) {
+        var v = a[q.id + '-' + (i + 1)];
+        if (v !== undefined) {
+          if (total === null) total = 0;
+          if (v === '是') {
+            var sc = (q.scoring && q.scoring.yesScore && q.scoring.yesScore[i + 1] !== undefined)
+              ? q.scoring.yesScore[i + 1] : (q.scoring ? q.scoring.default : 0);
+            total += sc || 0;
+          }
+        }
+      });
+      return total;
+    }
+    function sScore(key) {
+      var q = FLOW.questionnaires[key], t = null;
+      q.items.forEach(function (item, i) {
+        var v = a[q.id + '-' + (i + 1)];
+        if (v !== undefined) { if (t === null) t = 0; t += parseInt(v, 10) || 0; }
+      });
+      return t;
+    }
+    var q1 = qScore('questionnaire1'), q2 = qScore('questionnaire2');
+    var qTotal = (q1 === null && q2 === null) ? null : (q1 || 0) + (q2 || 0);
+    var somaticPct = qTotal === null ? null : qTotal / 200;
+    var bdc = { pre: sScore('bdcPre'), post: sScore('bdcPost') };
+    bdc.delta = (bdc.pre !== null && bdc.post !== null) ? bdc.post - bdc.pre : null;
+    var bai = { pre: sScore('baiPre'), post: sScore('baiPost') };
+    bai.delta = (bai.pre !== null && bai.post !== null) ? bai.post - bai.pre : null;
+
+    var state = { emotion: { pre: null, post: null }, body: { pre: null, post: null } };
+    var stateDetails = [];
+    ['pre', 'post'].forEach(function (phase) {
+      ['emotion', 'body'].forEach(function (domain) {
+        var sum = 0, has = false;
+        for (var r = 1; r <= FLOW.stateForm.maxRounds; r++) {
+          var v = a['state_' + phase + '_' + (domain === 'emotion' ? 'e' : 'b') + r];
+          if (v && v.selections) {
+            var parts = [];
+            for (var name in v.selections) { sum += v.selections[name]; has = true; parts.push(name + ':' + v.selections[name]); }
+            if (parts.length) stateDetails.push({ phase: phase, domain: domain, round: r, text: parts.join('，') });
+          }
+        }
+        if (has) state[domain][phase] = sum;
+      });
+    });
+    state.emotion.delta = (state.emotion.pre !== null && state.emotion.post !== null) ? state.emotion.post - state.emotion.pre : null;
+    state.body.delta = (state.body.pre !== null && state.body.post !== null) ? state.body.post - state.body.pre : null;
+
+    return { q1: q1, q2: q2, qTotal: qTotal, somaticPct: somaticPct, emotionalPct: somaticPct === null ? null : 1 - somaticPct, bdc: bdc, bai: bai, state: state, stateDetails: stateDetails };
+  }
+
+  // ================= 渲染框架 =================
+  function render() {
+    stopTimers();
+    var root = $('#app');
+    root.innerHTML = '';
+    if (app.view === 'home') renderHome(root);
+    else if (app.view === 'run') renderRun(root);
+    else if (app.view === 'records') renderRecords(root);
+    else if (app.view === 'detail') renderDetail(root);
+    else if (app.view === 'done') renderDone(root);
+  }
+
+  function stopTimers() {
+    if (app.opTimer) { clearTimeout(app.opTimer); app.opTimer = null; }
+    if (app.voiceTimer) { clearInterval(app.voiceTimer); app.voiceTimer = null; }
+    if (app.manager) app.manager.pause();
+  }
+
+  function screen(title, posText, bannerText) {
+    var root = $('#app');
+    var sc = el('div', 'screen');
+    if (bannerText) sc.appendChild(el('div', 'banner', bannerText));
+    if (title !== null) {
+      var hd = el('div', 'hd');
+      hd.appendChild(el('div', 'step-title', title));
+      if (posText) hd.appendChild(el('div', 'unit-pos', posText));
+      sc.appendChild(hd);
+    }
+    var body = el('div', 'body');
+    sc.appendChild(body);
+    var ft = el('div', 'ft');
+    sc.appendChild(ft);
+    root.appendChild(sc);
+    return { body: body, ft: ft };
+  }
+
+  // ================= 首页 =================
+  function renderHome(root) {
+    var snap = Store.loadSnapshot();
+    var hasSnap = !!(snap && snap.session && snap.session.status === 'running');
+    var box = el('div', 'home');
+
+    box.appendChild(el('div', 'app-name', FLOW.meta.title));
+    box.appendChild(el('div', 'app-sub', '流程引导 · 语音跟读 · 问答记录 · 本机保存'));
+
+    var notice = el('div', 'notice');
+    notice.innerHTML = '<b>使用说明</b><br>' +
+      '· 按预设顺序逐步展示引导提示：操作提示页停留 3 秒自动进入下一页；朗读页跟读识别，覆盖率达 <b>85%</b> 且静音 3 秒后自动翻页。<br>' +
+      '· 语音识别由您浏览器自带的语音服务完成（部分浏览器会经由 Apple / Google 的语音服务处理音频）；<b>本工具自身不录音、不保存音频和完整识别文字</b>。<br>' +
+      '· 识别不可用、权限被拒或嘈杂环境时，可随时点「上一步 / 下一步」<b>手动继续</b>。<br>' +
+      '· 所有问答与量表结果仅保存在本机，可随时在「问答记录」中导出 CSV（Excel 可打开）。请定期导出备份。' +
+      (ASR.isWeChat() ? '<br><span class="warn">当前在微信内打开：语音识别不可用，将全程手动模式。请点右上角「···」选择「在浏览器打开」以启用语音识别。</span>' :
+        (!ASR.supported() ? '<br><span class="warn">当前浏览器不支持语音识别，将全程手动模式。</span>' : '')) +
+      (location.protocol === 'file:' ? '<br><span class="warn">提示：直接打开本地文件时语音识别可能不可用，建议通过链接访问。</span>' : '');
+    box.appendChild(notice);
+
+    if (hasSnap) {
+      var cont = el('button', 'btn btn-primary btn-block',
+        '继续上次（' + (snap.session.clientName || '未命名') + ' · ' + fmtTime(snap.session.startTime) + ' · 第' + (snap.unitIndex) + '/' + (UNITS.length - 1) + '步）');
+      cont.onclick = function () {
+        app.session = snap.session;
+        app.unitIndex = snap.unitIndex;
+        app.screenIndex = 0;
+        app.view = 'run';
+        render();
+      };
+      box.appendChild(cont);
+    }
+
+    var start = el('button', 'btn btn-primary btn-block', '开始新流程');
+    start.onclick = function () {
+      app.session = newSession();
+      app.unitIndex = 0;
+      app.screenIndex = 0;
+      app.view = 'run';
+      render();
+    };
+    box.appendChild(start);
+
+    var rec = el('button', 'btn btn-ghost btn-block', '问答记录');
+    rec.style.flex = '1';
+    rec.onclick = function () { app.view = 'records'; render(); };
+    box.appendChild(rec);
+
+    var wrap = el('div', 'screen');
+    wrap.appendChild(box);
+    root.appendChild(wrap);
+  }
+
+  // ================= 执行视图 =================
+  function renderRun(root) {
+    var unit = UNITS[app.unitIndex];
+    if (!unit) return;
+    var pos = (app.unitIndex) + ' / ' + (UNITS.length - 1);
+    var ui = screen(unit.step || FLOW.meta.title, pos, ASR.isWeChat() ? '微信内打开：语音识别不可用，请点右上角「···」在浏览器中打开' : null);
+
+    if (unit.type === 'intro') renderIntro(ui, unit);
+    else if (unit.type === 'op') renderOp(ui, unit);
+    else if (unit.type === 'reading') renderReading(ui, unit);
+    else if (unit.type === 'qintro') renderQIntro(ui, unit);
+    else if (unit.type === 'question') renderQuestion(ui, unit);
+    else if (unit.type === 'qresult') renderQResult(ui, unit);
+    else if (unit.type === 'stateround') renderStateRound(ui, unit);
+    else if (unit.type === 'comparison') renderComparison(ui, unit);
+  }
+
+  function navFooter(ui, opts) {
+    var ft = ui.ft;
+    ft.innerHTML = '';
+    var prev = el('button', 'btn btn-ghost', '上一步');
+    prev.disabled = app.unitIndex <= 0;
+    prev.onclick = function () { gotoUnit(app.unitIndex - 1); };
+    ft.appendChild(prev);
+    if (opts && opts.extra) opts.extra.forEach(function (b) { ft.appendChild(b); });
+    var next = el('button', 'btn btn-primary', (opts && opts.nextLabel) || '下一步');
+    next.disabled = !!(opts && opts.nextDisabled);
+    if (!(opts && opts.hideNext)) {
+      next.onclick = function () { if (opts && opts.onNext) opts.onNext(); else gotoUnit(app.unitIndex + 1); };
+      ft.appendChild(next);
+    }
+    return { next: next };
+  }
+
+  function gotoUnit(i) {
+    stopTimers();
+    if (i >= UNITS.length) return finishSession();
+    app.unitIndex = Math.max(0, i);
+    app.screenIndex = 0;
+    app.userPaused = false;
+    snapshot();
+    render();
+  }
+
+  function nextUnit() { gotoUnit(app.unitIndex + 1); }
+
+  // ---- 首屏表单 ----
+  function renderIntro(ui, unit) {
+    var b = ui.body;
+    var s = app.session;
+    var g1 = el('div', 'form-row');
+    g1.appendChild(el('label', '', '受访者姓名'));
+    var inName = el('input');
+    inName.placeholder = '请输入来访者姓名';
+    inName.value = s.clientName || '';
+    g1.appendChild(inName);
+    var g2 = el('div', 'form-row');
+    g2.appendChild(el('label', '', '本次催眠目标'));
+    var inGoal = el('textarea');
+    inGoal.rows = 3;
+    inGoal.placeholder = '例如：缓解考试焦虑；改善睡眠……';
+    inGoal.value = s.goal || '';
+    g2.appendChild(inGoal);
+    b.appendChild(g1);
+    b.appendChild(g2);
+    b.appendChild(el('p', 'q-hint', '两项均填写后点击「开始流程」。内容将保存在本机会话中并随 CSV 导出。'));
+
+    var nav = navFooter(ui, {
+      nextLabel: '开始流程', nextDisabled: true, onNext: function () {
+        s.clientName = inName.value.trim();
+        s.goal = inGoal.value.trim();
+        setRecord('intro', '基本信息', '受访者姓名', '文本', s.clientName);
+        setRecord('intro_goal', '基本信息', '本次催眠目标', '文本', s.goal);
+        saveSession();
+        // 用户手势内预热麦克风权限
+        if (ASR.available()) ASR.warmup();
+        nextUnit();
+      }
+    });
+    function check() { nav.next.disabled = !(inName.value.trim() && inGoal.value.trim()); }
+    inName.oninput = check; inGoal.oninput = check; check();
+  }
+
+  // ---- 测量式分页 ----
+  function measureMount(contentCls) {
+    var bodyEl = $('.body');
+    var m = el('div', 'content ' + (contentCls || ''));
+    m.style.cssText = 'position:absolute;visibility:hidden;left:-9999px;top:0;width:' +
+      (bodyEl.clientWidth - 40) + 'px;';
+    bodyEl.appendChild(m);
+    return { el: m, maxH: bodyEl.clientHeight - 36 };
+  }
+
+  function paginateSentences(sentences, contentCls, reserveH) {
+    var mm = measureMount(contentCls);
+    var maxH = mm.maxH - (reserveH || 0);
+    try {
+      return Pager.paginate(sentences, function () { return mm.el; }, maxH);
+    } finally {
+      if (mm.el.parentNode) mm.el.parentNode.removeChild(mm.el);
+    }
+  }
+
+  // ---- 操作提示页 ----
+  function renderOp(ui, unit) {
+    var b = ui.body;
+    var sentences = splitSentences(unit.texts.length ? unit.texts : [unit.step || '']);
+    var screens = paginateSentences(sentences, 'op-content', 0);
+    var scr = screens[Math.min(app.screenIndex, screens.length - 1)];
+
+    var c = el('div', 'content op-content');
+    c.appendChild(el('span', 'op-tag', '操作提示'));
+    for (var i = scr.from; i <= scr.to; i++) {
+      var sp = el('span', 'sentence', sentences[i].text);
+      c.appendChild(sp);
+    }
+    if (screens.length > 1) {
+      c.appendChild(el('span', 'auto-tip', '（第' + (app.screenIndex + 1) + '/' + screens.length + '屏）'));
+    }
+    c.appendChild(el('span', 'auto-tip', '3 秒后自动进入下一页，可点击下一步跳过'));
+    b.appendChild(c);
+
+    navFooter(ui, {
+      nextLabel: screens.length > 1 && app.screenIndex < screens.length - 1 ? '下一屏' : '下一步',
+      onNext: function () {
+        if (app.screenIndex < screens.length - 1) { app.screenIndex++; render(); }
+        else nextUnit();
+      }
+    });
+
+    app.opTimer = setTimeout(function () {
+      if (app.screenIndex < screens.length - 1) { app.screenIndex++; render(); }
+      else nextUnit();
+    }, 3000);
+  }
+
+  // ---- 朗读页 ----
+  function renderReading(ui, unit) {
+    var b = ui.body;
+    var sentences = splitSentences(unit.texts);
+    var reserveH = 62; // voice-bar 高度
+    var screens = paginateSentences(sentences, '', reserveH);
+    if (app.screenIndex >= screens.length) app.screenIndex = screens.length - 1;
+    var scr = screens[app.screenIndex];
+
+    // 语音状态条
+    var bar = el('div', 'voice-bar');
+    var status = el('div', 'voice-status');
+    var st = el('span', 'st', '');
+    var pct = el('span', '', '0%');
+    status.appendChild(st);
+    status.appendChild(pct);
+    var track = el('div', 'prog-track');
+    var fill = el('div', 'prog-fill');
+    track.appendChild(fill);
+    bar.appendChild(status);
+    bar.appendChild(track);
+
+    var c = el('div', 'content');
+    for (var i = scr.from; i <= scr.to; i++) {
+      c.appendChild(el('span', 'sentence', sentences[i].text));
+    }
+    b.appendChild(bar);
+    b.appendChild(c);
+
+    // 按钮
+    var pauseBtn = el('button', 'btn btn-ghost btn-small', '暂停');
+    pauseBtn.onclick = function () {
+      if (app.userPaused) {
+        app.userPaused = false;
+        pauseBtn.textContent = '暂停';
+        if (app.manager && !app.manager.degraded) app.manager.resume();
+      } else {
+        app.userPaused = true;
+        pauseBtn.textContent = '继续';
+        if (app.manager) app.manager.pause();
+      }
+    };
+    var restartBtn = el('button', 'btn btn-ghost btn-small', '重新识别');
+    restartBtn.onclick = function () {
+      if (app.manager && !app.manager.degraded) {
+        app.manager.reset();
+        app.manager.start();
+        app.userPaused = false;
+        pauseBtn.textContent = '暂停';
+        setVoiceStatus();
+      } else {
+        toast('当前环境不支持语音识别');
+      }
+    };
+
+    navFooter(ui, {
+      extra: [restartBtn, pauseBtn],
+      nextLabel: app.screenIndex < screens.length - 1 ? '下一屏' : '下一步',
+      onNext: function () {
+        if (app.screenIndex < screens.length - 1) { app.screenIndex++; render(); }
+        else nextUnit();
+      }
+    });
+
+    // 更新进度 UI
+    function setVoiceStatus(txt, off) {
+      st.textContent = txt || '';
+      st.className = 'st' + (off ? ' off' : '');
+      var p = app.tracker ? app.tracker.progress() : 0;
+      pct.textContent = Math.round(p * 100) + '%';
+      fill.style.width = Math.round(p * 100) + '%';
+    }
+
+    function highlight() {
+      if (!app.tracker) return;
+      var cur = app.tracker.currentSentence();
+      var spans = c.querySelectorAll('.sentence');
+      for (var k = 0; k < spans.length; k++) {
+        var idx = scr.from + k;
+        spans[k].className = 'sentence' + (idx < cur ? ' done' : (idx === cur ? ' cur' : ''));
+      }
+      // 声音跟文字走：cursor 越过本屏 → 自动切屏
+      if (cur > scr.to && app.screenIndex < screens.length - 1) {
+        app.screenIndex++;
+        render();
+      }
+    }
+
+    // ASR 可用性
+    var reason = null;
+    if (!ASR.available()) reason = ASR.isWeChat() ? '微信内不可用·手动模式' : '识别不可用·手动模式';
+    else if (app.asrDegraded) reason = '识别已降级·手动模式';
+
+    if (reason) {
+      setVoiceStatus(reason, true);
+      return;
+    }
+
+    // 创建/复用 Manager
+    if (!app.manager) {
+      app.manager = new ASR.Manager({
+        lang: V.lang,
+        onResult: function (cum) {
+          if (!app.tracker) return;
+          app.tracker.feed(cum);
+          setVoiceStatus('聆听中');
+          highlight();
+        },
+        onStatus: function (s) {
+          if (s === 'listening') setVoiceStatus('聆听中');
+          else if (s === 'paused') setVoiceStatus('已暂停');
+        },
+        onDegrade: function (r) {
+          app.asrDegraded = true;
+          setVoiceStatus('识别已降级·手动模式', true);
+          toast('语音识别' + (r || '不可用') + '，请手动点「下一步」继续');
+          render();
+        }
+      });
+    }
+
+    // 新建 Tracker（进度对本朗读单元整体计算，翻屏不清零）
+    if (!app.tracker || app.tracker.unitId !== unit.id) {
+      app.tracker = new Coverage.Tracker(sentences);
+      app.tracker.unitId = unit.id;
+    }
+
+    if (app.userPaused) {
+      setVoiceStatus('已暂停');
+    } else {
+      app.manager.reset();
+      app.manager.start();
+      setVoiceStatus('聆听中');
+    }
+
+    // 自动翻页轮询：进度≥85% 且 静音 3 秒
+    app.voiceTimer = setInterval(function () {
+      if (!app.tracker || !app.manager || !app.manager.active) return;
+      var p = app.tracker.progress();
+      var silent = Date.now() - (app.manager.lastResultTs || 0) >= V.silenceMs;
+      var ok = (p >= V.threshold || app.tracker.doneAll()) && silent && app.manager.lastResultTs > 0;
+      if (ok) {
+        if (app.screenIndex < screens.length - 1) { app.screenIndex++; render(); }
+        else { toast('朗读完成，自动进入下一步'); nextUnit(); }
+      } else if (p >= V.threshold && !silent) {
+        setVoiceStatus('已达标，等待静音 3 秒…');
+      } else if (app.manager.lastResultTs > 0 && Date.now() - app.manager.lastResultTs >= 2000) {
+        setVoiceStatus('聆听中（已静音）');
+      }
+    }, 500);
+  }
+
+  // ---- 量表首页 ----
+  function renderQIntro(ui, unit) {
+    var q = FLOW.questionnaires[unit.qid];
+    var b = ui.body;
+    b.appendChild(el('h3', 'section-title', q.title));
+    var meta = [];
+    meta.push('共 ' + q.items.length + ' 题');
+    if (q.needsReadAloud) meta.push('每题先朗读题目再作答');
+    if (q.allowsSkip) meta.push('可跳过整份量表');
+    b.appendChild(el('p', 'q-hint', '· ' + meta.join(' · ')));
+    if (q.scoreOptions) {
+      b.appendChild(el('p', 'q-hint', '根据在过去数天内的情况，选择各项情绪对来访者的困扰程度。'));
+    }
+
+    var startBtn = el('button', 'btn btn-primary btn-block', '开始答题');
+    startBtn.onclick = function () { nextUnit(); };
+    b.appendChild(startBtn);
+
+    var skipBtn = null;
+    if (q.allowsSkip) {
+      skipBtn = el('button', 'btn btn-warn btn-small', '跳过此量表');
+      skipBtn.onclick = function () {
+        q.items.forEach(function (item, i) { delete app.session.answers[q.id + '-' + (i + 1)]; });
+        setRecord('skip_' + q.id, q.title, '整份量表', '跳过', '跳过');
+        saveSession();
+        // 跳到本量表最后一题之后
+        var last = app.unitIndex;
+        for (var i = app.unitIndex; i < UNITS.length; i++) {
+          if (UNITS[i].qid === unit.qid && UNITS[i].type === 'question') last = i;
+        }
+        gotoUnit(last + 1);
+      };
+    }
+    navFooter(ui, { extra: skipBtn ? [skipBtn] : null, nextLabel: '开始', onNext: function () { nextUnit(); } });
+    // 用 footer 的下一步与开始答题等价；隐藏 body 内重复按钮
+    startBtn.style.display = 'none';
+  }
+
+  // ---- 单题屏 ----
+  function renderQuestion(ui, unit) {
+    var q = FLOW.questionnaires[unit.qid];
+    var item = unit.item;
+    var b = ui.body;
+    var answered = app.session.answers[unit.id];
+
+    b.appendChild(el('div', 'q-text', (unit.index + 1) + '. ' + item.text));
+    var opts = el('div', 'opts');
+    b.appendChild(opts);
+
+    function buildOptions() {
+      opts.innerHTML = '';
+      item.options.forEach(function (o) {
+        var val = o;
+        if (q.scoreOptions) val = parseInt(o, 10);
+        var btn = el('button', 'opt-btn' + (answered === val ? ' picked' : ''), o);
+        btn.onclick = function () {
+          app.session.answers[unit.id] = val;
+          var ansType = q.scoreOptions ? '0-3评分' : (item.options.length === 2 ? '是/否' : '选项');
+          setRecord(unit.id, q.title, item.text, ansType, q.scoreOptions ? val + '（' + o.split('·')[1] + '）' : o);
+          saveSession();
+          opts.querySelectorAll('.opt-btn').forEach(function (x) { x.className = 'opt-btn'; });
+          btn.className = 'opt-btn picked';
+          setTimeout(nextUnit, 420);
+        };
+        opts.appendChild(btn);
+      });
+    }
+
+    if (q.needsReadAloud) {
+      b.insertBefore(el('p', 'q-hint', '请先向来访者朗读题目，选项稍后显示…'), opts);
+      setTimeout(function () {
+        var h = b.querySelector('.q-hint');
+        if (h) h.remove();
+        buildOptions();
+      }, 2000);
+    } else {
+      buildOptions();
+    }
+
+    navFooter(ui, {});
+  }
+
+  // ---- 问卷结果屏 ----
+  function renderQResult(ui, unit) {
+    var sc = computeScores(app.session);
+    var b = ui.body;
+    var box = el('div', 'big-result');
+    if (sc.qTotal === null) {
+      box.appendChild(el('div', 'num', '—'));
+      box.appendChild(el('div', 'lab', '两份问卷均已跳过'));
+    } else {
+      var r1 = el('div');
+      var n1 = el('div', 'num', Math.round(sc.somaticPct * 100) + '%');
+      r1.appendChild(n1);
+      r1.appendChild(el('div', 'lab', '躯体型暗示感受性'));
+      var r2 = el('div');
+      var n2 = el('div', 'num red', Math.round(sc.emotionalPct * 100) + '%');
+      r2.appendChild(n2);
+      r2.appendChild(el('div', 'lab', '情绪型暗示感受性'));
+      box.appendChild(r1);
+      box.appendChild(r2);
+      box.appendChild(el('div', 'sub', '总分 ' + sc.qTotal + ' / 200（躯体型 = 总分/200）'));
+    }
+    b.appendChild(box);
+
+    if (sc.qTotal !== null) {
+      setRecord('qresult', '暗示感受性问卷汇总', '躯体型/情绪型暗示感受性', '百分比',
+        Math.round(sc.somaticPct * 100) + '% / ' + Math.round(sc.emotionalPct * 100) + '%');
+      saveSession();
+    }
+
+    navFooter(ui, { nextLabel: '继续' });
+    app.opTimer = setTimeout(nextUnit, 3000);
+  }
+
+  // ---- 来访者状态轮 ----
+  function renderStateRound(ui, unit) {
+    var sf = FLOW.stateForm;
+    var options = unit.domain === 'emotion' ? sf.emotionOptions : sf.bodyOptions;
+    var domName = unit.domain === 'emotion' ? '情绪状态' : '身体状态';
+    var phaseName = unit.phase === 'pre' ? '催眠前' : '催眠后';
+    var b = ui.body;
+
+    b.appendChild(el('h3', 'section-title', phaseName + ' · ' + domName + '（第' + unit.round + '轮 / 最多' + sf.maxRounds + '轮）'));
+    b.appendChild(el('p', 'q-hint', '选择' + domName + '（可多选），再为每项打 0–10 分（0=无 → 10=极重）。'));
+
+    var chips = el('div', 'chips');
+    var scoreArea = el('div');
+    b.appendChild(chips);
+    b.appendChild(scoreArea);
+
+    var selected = {}; // name -> {picked, score}
+    var prev = app.session.answers[unit.id];
+    if (prev && prev.selections) {
+      for (var k in prev.selections) selected[k] = { picked: true, score: prev.selections[k] };
+    }
+
+    function renderScores() {
+      scoreArea.innerHTML = '';
+      Object.keys(selected).forEach(function (name) {
+        if (!selected[name].picked) return;
+        var row = el('div', 'score-row');
+        row.appendChild(el('div', 'score-name', name + '：' + (selected[name].score !== undefined ? selected[name].score + ' 分' : '请打分')));
+        var so = el('div', 'score-opts');
+        for (var v = 0; v <= 10; v++) {
+          (function (vv) {
+            var bt = el('button', selected[name].score === vv ? 'picked' : '', String(vv));
+            bt.onclick = function () {
+              selected[name].score = vv;
+              renderScores();
+            };
+            so.appendChild(bt);
+          })(v);
+        }
+        row.appendChild(so);
+        scoreArea.appendChild(row);
+      });
+    }
+
+    options.forEach(function (name) {
+      var chip = el('button', 'chip' + (selected[name] && selected[name].picked ? ' on' : ''), name);
+      chip.onclick = function () {
+        if (!selected[name]) selected[name] = { picked: false };
+        selected[name].picked = !selected[name].picked;
+        chip.className = 'chip' + (selected[name].picked ? ' on' : '');
+        renderScores();
+      };
+      chips.appendChild(chip);
+    });
+    renderScores();
+
+    function collect() {
+      var sel = {};
+      Object.keys(selected).forEach(function (name) {
+        if (selected[name].picked && selected[name].score !== undefined) sel[name] = selected[name].score;
+      });
+      return sel;
+    }
+
+    var skipBtn = null;
+    if (unit.round >= 2) {
+      skipBtn = el('button', 'btn btn-warn btn-small', '跳过此轮');
+      skipBtn.onclick = function () {
+        setRecord(unit.id, '来访者状态（' + phaseName + '）', domName + '·第' + unit.round + '轮', '多选+0-10', '跳过');
+        saveSession();
+        nextUnit();
+      };
+    }
+
+    navFooter(ui, {
+      extra: skipBtn ? [skipBtn] : null,
+      nextLabel: '确认记录',
+      nextDisabled: false,
+      onNext: function () {
+        var sel = collect();
+        var names = Object.keys(sel);
+        if (!names.length) {
+          setRecord(unit.id, '来访者状态（' + phaseName + '）', domName + '·第' + unit.round + '轮', '多选+0-10', '未记录');
+        } else {
+          app.session.answers[unit.id] = { selections: sel };
+          setRecord(unit.id, '来访者状态（' + phaseName + '）', domName + '·第' + unit.round + '轮', '多选+0-10',
+            names.map(function (n) { return n + ':' + sel[n]; }).join('，'));
+        }
+        saveSession();
+        nextUnit();
+      }
+    });
+  }
+
+  // ---- 前后对比表 ----
+  function renderComparison(ui, unit) {
+    var sc = computeScores(app.session);
+    var b = ui.body;
+    b.appendChild(el('h3', 'section-title', '催眠前后评分对比'));
+
+    function cell(v) {
+      if (v === null || v === undefined) return '跳过';
+      if (v > 0) return '+' + v;
+      return String(v);
+    }
+    function rowHtml(name, o) {
+      var d = o.delta;
+      var cls = d === null ? '' : (d < 0 ? 'down' : (d > 0 ? 'up' : ''));
+      return '<tr><td>' + name + '</td><td>' + (o.pre === null ? '跳过' : o.pre) + '</td><td>' +
+        (o.post === null ? '跳过' : o.post) + '</td><td class="' + cls + '">' + cell(d) + '</td></tr>';
+    }
+    var tb = el('table', 'cmp-table');
+    tb.innerHTML = '<tr><th>指标</th><th>催眠前</th><th>催眠后</th><th>差异</th></tr>' +
+      rowHtml('BDC 量表总分', sc.bdc) +
+      rowHtml('BAI 量表总分', sc.bai) +
+      rowHtml('情绪状态评分合计', sc.state.emotion) +
+      rowHtml('身体状态评分合计', sc.state.body);
+    b.appendChild(tb);
+    b.appendChild(el('p', 'q-hint', '差异 = 催眠后 − 催眠前；负数表示催眠后评分下降。'));
+
+    if (sc.stateDetails.length) {
+      var box = el('div', 'detail-box');
+      box.appendChild(el('h4', '', '情绪 / 身体状态选择明细'));
+      sc.stateDetails.forEach(function (d) {
+        box.appendChild(el('p', '', (d.phase === 'pre' ? '催眠前' : '催眠后') + ' · ' +
+          (d.domain === 'emotion' ? '情绪' : '身体') + ' · 第' + d.round + '轮：' + d.text));
+      });
+      b.appendChild(box);
+    }
+    if (sc.qTotal !== null) {
+      var qbox = el('div', 'detail-box');
+      qbox.appendChild(el('h4', '', '暗示感受性'));
+      qbox.appendChild(el('p', '', '躯体型 ' + Math.round(sc.somaticPct * 100) + '% · 情绪型 ' + Math.round(sc.emotionalPct * 100) + '%'));
+      b.appendChild(qbox);
+    }
+
+    var exportBtn = el('button', 'btn btn-ghost btn-small', '导出 CSV');
+    exportBtn.onclick = function () { exportCsv(); };
+
+    navFooter(ui, {
+      extra: [exportBtn],
+      nextLabel: '完成流程',
+      onNext: function () { finishSession(); }
+    });
+  }
+
+  function finishSession() {
+    stopTimers();
+    var s = app.session;
+    if (s && s.status === 'running') {
+      s.status = 'done';
+      s.endTime = Date.now();
+      saveSession();
+    }
+    Store.clearSnapshot();
+    app.view = 'done';
+    render();
+  }
+
+  function exportCsv() {
+    var sc = computeScores(app.session);
+    var csv = CSV.build(app.session, sc);
+    var name = '催眠流程_' + app.session.id + '.csv';
+    var ok = CSV.download(name, csv, $('.body'));
+    if (ok) toast('CSV 已开始下载');
+  }
+
+  // ================= 完成页 =================
+  function renderDone(root) {
+    var sc = computeScores(app.session);
+    var box = el('div', 'done-hero');
+    box.appendChild(el('div', 'icon', '🌿'));
+    box.appendChild(el('h2', '', '本次流程已完成'));
+    box.appendChild(el('p', '', app.session.clientName + ' · ' + fmtTime(app.session.startTime)));
+    root.appendChild(box);
+
+    var btns = el('div', '');
+    btns.style.cssText = 'padding: 0 22px;';
+    var ex = el('button', 'btn btn-primary btn-block', '导出本次 CSV');
+    ex.onclick = function () {
+      var sc2 = computeScores(app.session);
+      var ok = CSV.download('催眠流程_' + app.session.id + '.csv', CSV.build(app.session, sc2), root);
+      if (ok) toast('CSV 已开始下载');
+    };
+    btns.appendChild(ex);
+    var goRec = el('button', 'btn btn-ghost btn-block', '查看问答记录');
+    goRec.onclick = function () { app.view = 'records'; render(); };
+    btns.appendChild(goRec);
+    var home = el('button', 'btn btn-ghost btn-block', '返回首页');
+    home.onclick = function () { app.view = 'home'; app.session = null; render(); };
+    btns.appendChild(home);
+    root.appendChild(btns);
+  }
+
+  // ================= 记录页 =================
+  function renderRecords(root) {
+    var ui = screen('问答记录', null);
+    var b = ui.body;
+    b.style.overflowY = 'auto';
+    b.style.padding = '14px 16px';
+    var list = Store.list();
+    ui.ft.innerHTML = '';
+    var back = el('button', 'btn btn-ghost', '返回首页');
+    back.onclick = function () { app.view = 'home'; render(); };
+    ui.ft.appendChild(back);
+    var allBtn = el('button', 'btn btn-primary', '导出全部 CSV');
+    allBtn.onclick = function () {
+      var rows = [];
+      list.forEach(function (s) {
+        rows.push(CSV.build(s, s.status === 'done' ? computeScoresFor(s) : null));
+      });
+      var ok = CSV.download('催眠流程_全部记录.csv', rows.join('\r\n\r\n'), b);
+      if (ok) toast('CSV 已开始下载');
+    };
+    ui.ft.appendChild(allBtn);
+
+    if (!list.length) {
+      b.appendChild(el('p', 'q-hint', '暂无记录。完成一次流程后会保存到本机。'));
+      return;
+    }
+    b.appendChild(el('p', 'q-hint', '数据仅保存在本机浏览器，清除浏览器缓存会丢失，请定期导出备份。'));
+    list.forEach(function (s) {
+      var item = el('div', 'rec-item');
+      item.appendChild(el('div', 't', (s.clientName || '未命名') + ' · ' + (s.status === 'done' ? '已完成' : '进行中')));
+      item.appendChild(el('div', 'm', s.id + ' · ' + fmtTime(s.startTime) + ' · ' + (s.records ? s.records.length : 0) + ' 条记录'));
+      item.onclick = function () { app.detailId = s.id; app.view = 'detail'; render(); };
+      b.appendChild(item);
+    });
+  }
+
+  function computeScoresFor(s) {
+    var cur = app.session;
+    app.session = s;
+    var r = computeScores(s);
+    app.session = cur;
+    return r;
+  }
+
+  function renderDetail(root) {
+    var s = Store.get(app.detailId);
+    if (!s) { app.view = 'records'; render(); return; }
+    var ui = screen(s.clientName || '未命名', s.id + ' · ' + fmtTime(s.startTime));
+    var b = ui.body;
+    b.style.overflowY = 'auto';
+    var sc = null;
+    if (s.status === 'done') sc = computeScoresFor(s);
+
+    b.appendChild(el('p', 'q-hint', (s.goal ? '目标：' + s.goal + ' · ' : '') +
+      (s.status === 'done' ? '已完成 · ' + fmtTime(s.endTime || s.startTime) : '进行中')));
+
+    if (sc) {
+      b.appendChild(el('h4', 'section-title', '结果汇总'));
+      var box = el('div', 'detail-box');
+      function line(t, v) { box.appendChild(el('p', '', t + '：' + v)); }
+      if (sc.qTotal !== null) {
+        line('暗示感受性总分', sc.qTotal + ' / 200');
+        line('躯体型 / 情绪型', Math.round(sc.somaticPct * 100) + '% / ' + Math.round(sc.emotionalPct * 100) + '%');
+      }
+      line('BDC 前测 / 后测', (sc.bdc.pre === null ? '跳过' : sc.bdc.pre) + ' / ' + (sc.bdc.post === null ? '跳过' : sc.bdc.post));
+      line('BAI 前测 / 后测', (sc.bai.pre === null ? '跳过' : sc.bai.pre) + ' / ' + (sc.bai.post === null ? '跳过' : sc.bai.post));
+      line('情绪评分 前 / 后', (sc.state.emotion.pre === null ? '—' : sc.state.emotion.pre) + ' / ' + (sc.state.emotion.post === null ? '—' : sc.state.emotion.post));
+      line('身体评分 前 / 后', (sc.state.body.pre === null ? '—' : sc.state.body.pre) + ' / ' + (sc.state.body.post === null ? '—' : sc.state.body.post));
+      b.appendChild(box);
+    }
+
+    b.appendChild(el('h4', 'section-title', '问答明细（' + (s.records || []).length + ' 条）'));
+    var lastGroup = null;
+    (s.records || []).forEach(function (r) {
+      if (r.group !== lastGroup) {
+        lastGroup = r.group;
+        var g = el('div', 'rec-group');
+        g.appendChild(el('h4', '', '【' + r.group + '】'));
+        b.appendChild(g);
+      }
+      var line = el('p', '', (r.question || '') + (r.question ? ' → ' : '') + r.answer);
+      line.style.cssText = 'font-size:13.5px;color:#5a554e;line-height:1.7;margin-left:8px;';
+      b.appendChild(line);
+    });
+
+    ui.ft.innerHTML = '';
+    var back = el('button', 'btn btn-ghost', '返回');
+    back.onclick = function () { app.view = 'records'; render(); };
+    ui.ft.appendChild(back);
+    var exBtn = el('button', 'btn btn-primary', '导出 CSV');
+    exBtn.onclick = function () {
+      var ok = CSV.download('催眠流程_' + s.id + '.csv', CSV.build(s, sc), b);
+      if (ok) toast('CSV 已开始下载');
+    };
+    ui.ft.appendChild(exBtn);
+    var delBtn = el('button', 'btn btn-warn', '删除');
+    delBtn.onclick = function () {
+      if (confirm('确定删除该会话记录？删除后不可恢复。')) {
+        Store.remove(s.id);
+        app.view = 'records';
+        render();
+      }
+    };
+    ui.ft.appendChild(delBtn);
+  }
+
+  // ================= 生命周期 =================
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      if (app.manager) app.manager.pause();
+      snapshot();
+    } else {
+      var unit = UNITS[app.unitIndex];
+      if (app.view === 'run' && unit && unit.type === 'reading' && !app.userPaused &&
+          app.manager && !app.manager.degraded) {
+        app.manager.resume();
+      }
+    }
+  });
+
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      if (app.view === 'run') { app.screenIndex = 0; render(); }
+    }, 300);
+  });
+
+  render();
+})();
+
+</script>
+</body>
+</html>
