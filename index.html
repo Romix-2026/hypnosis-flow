@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="kQ9TiEzgifN56KLg5f0DW7">
-<head data-page-node-id="HHDTql9ymRKoTo3MJfmVzA">
-<meta charset="UTF-8" data-page-node-id="bI3oXYHLjuJMCHVxmc5NsO">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" data-page-node-id="NJkuPozYfeeLiHl08lzkTV">
-<meta name="apple-mobile-web-app-capable" content="yes" data-page-node-id="EjBpnupyO7DBovwMgei1IA">
-<meta name="format-detection" content="telephone=no" data-page-node-id="PUtbEz8QFEH98eI9Fya3fL">
-<meta name="theme-color" content="#f6f4ef" data-page-node-id="SMotIyiGtf68mvlgehLR1r">
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#f6f4ef">
 <title>催眠流程引导</title>
 <style>
 /* 催眠流程引导 · 样式（移动端优先，纸墨暖色） */
@@ -209,8 +209,8 @@ textarea.csv-fallback {
 
 </style>
 </head>
-<body data-page-node-id="GaUDrHunepduKPULmff6Jq">
-<div id="app" data-page-node-id="W0ECfk73rOU5ITjhfZzmqD"></div>
+<body>
+<div id="app"></div>
 <script>
 window.__FLOW__ = {
   "meta": {
@@ -580,7 +580,12 @@ window.__FLOW__ = {
           "kind": "op",
           "text": "(重复①-⑤，直到手臂抬起至一半高度)"
         }
-      ]
+      ],
+      "skipTo": {
+        "sid": "2.6",
+        "gi": 0,
+        "label": "跳过至步骤2.6"
+      }
     },
     {
       "id": "2.6",
@@ -606,7 +611,8 @@ window.__FLOW__ = {
       "skipTo": {
         "sid": "2.7",
         "gi": 0,
-        "onlyFirst": true
+        "onlyFirst": true,
+        "label": "跳过至步骤2.7"
       }
     },
     {
@@ -2095,14 +2101,14 @@ window.__FLOW__ = {
       "id": "l25",
       "mode": "timer",
       "durationMs": 1200000,
-      "label": "信息加载计时",
+      "label": "2.5 信息加载计时",
       "start": {
         "sid": "2.5",
         "gi": 1
       },
       "end": {
         "sid": "2.5",
-        "gi": 10
+        "gi": 11
       },
       "exitTo": {
         "sid": "2.6",
@@ -2114,9 +2120,27 @@ window.__FLOW__ = {
           "gi": 0
         },
         "to": {
-          "sid": "2.5",
-          "gi": 11
+          "sid": "2.6",
+          "gi": 3
         }
+      }
+    },
+    {
+      "id": "l26",
+      "mode": "timer",
+      "durationMs": 1200000,
+      "label": "2.6 结束回跳",
+      "start": {
+        "sid": "2.5",
+        "gi": 1
+      },
+      "end": {
+        "sid": "2.6",
+        "gi": 3
+      },
+      "exitTo": {
+        "sid": "2.7",
+        "gi": 0
       }
     },
     {
@@ -2855,7 +2879,7 @@ var CSV = (function () {
     if (st && st.skipTo) {
       if (st.skipTo.onlyFirst && u.gi !== 0) return null;
       var i = findUnitIdx(st.skipTo.sid, st.skipTo.gi || 0);
-      if (i >= 0) return i;
+      if (i >= 0) return { i: i, label: st.skipTo.label || '跳过 ▸' };
     }
     return null;
   }
@@ -3105,8 +3129,10 @@ var CSV = (function () {
     // 跳过：步骤级 skipTo（如 2.6 → 2.7）优先，否则进入下一单元
     if (!(opts && opts.noSkip)) {
       var st = skipTarget();
-      var skip = el('button', 'btn btn-warn btn-small', st !== null ? '跳过 ▸' : '跳过');
-      skip.onclick = function () { gotoUnit(st !== null ? st : resolveSkip(app.unitIndex)); };
+      var lbl = st ? (st.label || '跳过 ▸') : '跳过';
+      var skip = el('button', 'btn btn-warn btn-small', lbl);
+      if (lbl.length > 4) { skip.style.flex = '1.6'; skip.style.padding = '8px 8px'; skip.style.fontSize = '13px'; }
+      skip.onclick = function () { gotoUnit(st ? st.i : resolveSkip(app.unitIndex)); };
       ft.appendChild(skip);
     }
 
