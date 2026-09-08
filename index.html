@@ -207,6 +207,21 @@ textarea.csv-fallback {
   border-radius: 14px; padding: 4px 10px;
 }
 
+/* ===== 来访者状态：分组选项 + 滚动 ===== */
+.state-scroll {
+  flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding-right: 2px; margin-top: 4px;
+}
+.chip-group { margin-bottom: 15px; }
+.chip-group-t {
+  font-size: 12.5px; font-weight: 700; color: #9a8a5a;
+  margin-bottom: 7px; letter-spacing: .5px;
+}
+/* 选项变多后收紧 chip 尺寸，保证一屏能放下更多 */
+.state-scroll .chips { gap: 7px; margin-bottom: 0; }
+.state-scroll .chip { padding: 7px 14px; font-size: 14px; border-radius: 16px; }
+.state-scroll .score-area { margin-top: 18px; }
+
 </style>
 </head>
 <body>
@@ -2074,26 +2089,242 @@ window.__FLOW__ = {
   },
   "stateForm": {
     "emotionOptions": [
+      "愤怒",
+      "生气",
+      "恼火",
+      "暴怒",
+      "愤慨",
+      "敌意",
+      "悲伤",
+      "悲哀",
+      "沮丧",
+      "绝望",
+      "失落",
+      "心碎",
+      "忧郁",
+      "恐惧",
+      "害怕",
+      "惊慌",
       "焦虑",
       "紧张",
-      "悲伤",
-      "愤怒",
-      "恐惧",
-      "其他"
+      "不安",
+      "担忧",
+      "嫉妒",
+      "羡慕",
+      "内疚",
+      "羞耻",
+      "尴尬",
+      "孤独",
+      "无聊",
+      "烦躁",
+      "冷漠",
+      "纠结",
+      "矛盾",
+      "五味杂陈",
+      "百感交集"
     ],
     "bodyOptions": [
-      "胃部",
-      "腹部",
       "头部",
-      "肩膀",
       "眼睛",
-      "胸口",
-      "其他"
+      "咽喉",
+      "腹部",
+      "肩膀",
+      "胸部",
+      "疲惫",
+      "疲倦",
+      "乏力",
+      "精疲力竭",
+      "昏昏欲睡",
+      "无精打采",
+      "失眠",
+      "嗜睡",
+      "困倦",
+      "清醒",
+      "头痛",
+      "发烧",
+      "感冒",
+      "咳嗽",
+      "头晕",
+      "恶心",
+      "疼痛",
+      "酸痛",
+      "肿胀",
+      "饥饿",
+      "口渴",
+      "饱胀",
+      "眼花",
+      "耳鸣",
+      "麻木",
+      "灵活",
+      "僵硬",
+      "抽筋",
+      "气喘",
+      "舒服",
+      "难受",
+      "刺痛",
+      "瘙痒",
+      "灼热",
+      "发冷",
+      "出汗",
+      "挺拔",
+      "佝偻",
+      "瘫软",
+      "轻盈",
+      "沉重"
     ],
     "maxRounds": 3,
     "scale": [
       0,
       10
+    ],
+    "emotionGroups": [
+      {
+        "name": "怒",
+        "items": [
+          "愤怒",
+          "生气",
+          "恼火",
+          "暴怒",
+          "愤慨",
+          "敌意"
+        ]
+      },
+      {
+        "name": "哀",
+        "items": [
+          "悲伤",
+          "悲哀",
+          "沮丧",
+          "绝望",
+          "失落",
+          "心碎",
+          "忧郁"
+        ]
+      },
+      {
+        "name": "惧",
+        "items": [
+          "恐惧",
+          "害怕",
+          "惊慌",
+          "焦虑",
+          "紧张",
+          "不安",
+          "担忧"
+        ]
+      },
+      {
+        "name": "消极",
+        "items": [
+          "嫉妒",
+          "羡慕",
+          "内疚",
+          "羞耻",
+          "尴尬",
+          "孤独",
+          "无聊",
+          "烦躁",
+          "冷漠"
+        ]
+      },
+      {
+        "name": "矛盾",
+        "items": [
+          "纠结",
+          "矛盾",
+          "五味杂陈",
+          "百感交集"
+        ]
+      }
+    ],
+    "bodyGroups": [
+      {
+        "name": "身体部位",
+        "items": [
+          "头部",
+          "眼睛",
+          "咽喉",
+          "腹部",
+          "肩膀",
+          "胸部"
+        ]
+      },
+      {
+        "name": "疲劳",
+        "items": [
+          "疲惫",
+          "疲倦",
+          "乏力",
+          "精疲力竭",
+          "昏昏欲睡",
+          "无精打采"
+        ]
+      },
+      {
+        "name": "睡眠相关",
+        "items": [
+          "失眠",
+          "嗜睡",
+          "困倦",
+          "清醒"
+        ]
+      },
+      {
+        "name": "不适/疾病",
+        "items": [
+          "头痛",
+          "发烧",
+          "感冒",
+          "咳嗽",
+          "头晕",
+          "恶心",
+          "疼痛",
+          "酸痛",
+          "肿胀"
+        ]
+      },
+      {
+        "name": "感官状态",
+        "items": [
+          "饥饿",
+          "口渴",
+          "饱胀",
+          "眼花",
+          "耳鸣",
+          "麻木"
+        ]
+      },
+      {
+        "name": "运动相关",
+        "items": [
+          "灵活",
+          "僵硬",
+          "抽筋",
+          "气喘"
+        ]
+      },
+      {
+        "name": "舒适度",
+        "items": [
+          "舒服",
+          "难受",
+          "刺痛",
+          "瘙痒",
+          "灼热",
+          "发冷",
+          "出汗"
+        ]
+      },
+      {
+        "name": "体态描述",
+        "items": [
+          "挺拔",
+          "佝偻",
+          "瘫软",
+          "轻盈",
+          "沉重"
+        ]
+      }
     ]
   },
   "loops": [
@@ -3581,7 +3812,7 @@ var CSV = (function () {
     var b = ui.body;
 
     b.appendChild(el('h3', 'section-title', phaseName + ' · ' + domName + '（第' + unit.round + '轮 / 最多' + sf.maxRounds + '轮）'));
-    b.appendChild(el('p', 'q-hint', '选择' + domName + '（可多选），再为每项打 0–10 分（0=无 → 10=极重）。'));
+    b.appendChild(el('p', 'q-hint', '选择' + domName + '（可多选，按类别分组、可上下滑动），再为每项打 0–10 分（0=无 → 10=极重）。'));
 
     // 催眠后（步骤12.3）：回显催眠前（步骤1.4.3）同一轮已记录的项目与分数，仅参照、不可修改
     if (unit.phase === 'post') {
@@ -3603,10 +3834,15 @@ var CSV = (function () {
       b.appendChild(preBox);
     }
 
-    var chips = el('div', 'chips');
+    // 选项区 + 打分区放在同一个可滚动容器里（身体状态有 47 项，需要滚动）
+    var scroll = el('div', 'state-scroll');
+    b.appendChild(scroll);
+
+    var groups = unit.domain === 'emotion' ? sf.emotionGroups : sf.bodyGroups;
+    var chipBox = el('div');
+    scroll.appendChild(chipBox);
     var scoreArea = el('div');
-    b.appendChild(chips);
-    b.appendChild(scoreArea);
+    scroll.appendChild(scoreArea);
 
     var selected = {}; // name -> {picked, score}
     var prev = app.session.answers[unit.id];
@@ -3636,16 +3872,28 @@ var CSV = (function () {
       });
     }
 
-    options.forEach(function (name) {
-      var chip = el('button', 'chip' + (selected[name] && selected[name].picked ? ' on' : ''), name);
-      chip.onclick = function () {
-        if (!selected[name]) selected[name] = { picked: false };
-        selected[name].picked = !selected[name].picked;
-        chip.className = 'chip' + (selected[name].picked ? ' on' : '');
-        renderScores();
-      };
-      chips.appendChild(chip);
-    });
+    // 按分组渲染（无分组配置时退化为平铺）
+    function renderChips() {
+      chipBox.innerHTML = '';
+      (groups && groups.length ? groups : [{ name: '', items: options }]).forEach(function (g) {
+        var wrap = el('div', 'chip-group');
+        if (g.name) wrap.appendChild(el('div', 'chip-group-t', g.name));
+        var row = el('div', 'chips');
+        g.items.forEach(function (name) {
+          var chip = el('button', 'chip' + (selected[name] && selected[name].picked ? ' on' : ''), name);
+          chip.onclick = function () {
+            if (!selected[name]) selected[name] = { picked: false };
+            selected[name].picked = !selected[name].picked;
+            chip.className = 'chip' + (selected[name].picked ? ' on' : '');
+            renderScores();
+          };
+          row.appendChild(chip);
+        });
+        wrap.appendChild(row);
+        chipBox.appendChild(wrap);
+      });
+    }
+    renderChips();
     renderScores();
 
     function collect() {
