@@ -222,6 +222,30 @@ textarea.csv-fallback {
 .state-scroll .chip { padding: 7px 14px; font-size: 14px; border-radius: 16px; }
 .state-scroll .score-area { margin-top: 18px; }
 
+/* ===== 「其他」自定义状态项 ===== */
+.other-box {
+  border: 1px dashed #d8cfbc; background: #fdfaf4; border-radius: 12px;
+  padding: 12px 13px; margin: 12px 0 6px;
+}
+.other-t { font-size: 12.5px; font-weight: 700; color: #9a8a5a; margin-bottom: 10px; line-height: 1.5; }
+.other-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.other-input {
+  flex: 1; min-width: 0; border: 1.5px solid #ddd6c9; border-radius: 11px;
+  padding: 10px 13px; font-size: 16px; background: #fff; color: #2c2a26;
+  font-family: inherit; outline: none;
+}
+.other-input:focus { border-color: #4a6fa5; }
+.other-del {
+  flex: none; width: 34px; height: 34px; border: 1px solid #e0d8c6; border-radius: 9px;
+  background: #fff; color: #a49c90; font-size: 19px; line-height: 1; cursor: pointer;
+}
+.other-add {
+  margin-top: 8px; padding: 7px 13px; font-size: 13px; color: #4a6fa5;
+  background: #fff; border: 1px dashed #b9c9e0; border-radius: 14px; cursor: pointer;
+}
+.other-box .score-row { margin-top: 2px; margin-bottom: 12px; }
+.other-box .score-name { font-size: 14px; }
+
 </style>
 </head>
 <body>
@@ -2121,7 +2145,8 @@ window.__FLOW__ = {
       "纠结",
       "矛盾",
       "五味杂陈",
-      "百感交集"
+      "百感交集",
+      "其他"
     ],
     "bodyOptions": [
       "头部",
@@ -2170,7 +2195,8 @@ window.__FLOW__ = {
       "佝偻",
       "瘫软",
       "轻盈",
-      "沉重"
+      "沉重",
+      "其他"
     ],
     "maxRounds": 3,
     "scale": [
@@ -2234,6 +2260,12 @@ window.__FLOW__ = {
           "矛盾",
           "五味杂陈",
           "百感交集"
+        ]
+      },
+      {
+        "name": "其他",
+        "items": [
+          "其他"
         ]
       }
     ],
@@ -2323,6 +2355,12 @@ window.__FLOW__ = {
           "瘫软",
           "轻盈",
           "沉重"
+        ]
+      },
+      {
+        "name": "其他",
+        "items": [
+          "其他"
         ]
       }
     ]
@@ -3814,11 +3852,12 @@ var CSV = (function () {
     b.appendChild(el('h3', 'section-title', phaseName + ' · ' + domName + '（第' + unit.round + '轮 / 最多' + sf.maxRounds + '轮）'));
     b.appendChild(el('p', 'q-hint', '选择' + domName + '（可多选，按类别分组、可上下滑动），再为每项打 0–10 分（0=无 → 10=极重）。'));
 
-    // 催眠后（步骤12.3）：回显催眠前（步骤1.4.3）同一轮已记录的项目与分数，仅参照、不可修改
+    // 催眠后（步骤12.3）：回显催眠前（步骤1.4.3）同一轮已记录的项目与分数，并自动带入下方供修改
+    var preSel = null;
     if (unit.phase === 'post') {
       var preId = 'state_pre_' + (unit.domain === 'emotion' ? 'e' : 'b') + unit.round;
       var preAns = app.session.answers[preId];
-      var preSel = (preAns && preAns.selections) || null;
+      preSel = (preAns && preAns.selections) || null;
       var preBox = el('div', 'pre-echo');
       preBox.appendChild(el('div', 'pre-echo-t', '催眠前（步骤 1.4.3）第 ' + unit.round + ' 轮记录'));
       if (!preSel || !Object.keys(preSel).length) {
@@ -3829,7 +3868,7 @@ var CSV = (function () {
           prow.appendChild(el('span', 'pre-chip', n + ' ' + preSel[n] + ' 分'));
         });
         preBox.appendChild(prow);
-        preBox.appendChild(el('div', 'pre-echo-note', '以上为催眠前已记录的分数，不可修改；请在下方填写催眠后分数。'));
+        preBox.appendChild(el('div', 'pre-echo-note', '已自动带入下方「催眠后」选项与分数，可直接改分、取消勾选或新增项目。'));
       }
       b.appendChild(preBox);
     }
@@ -3844,10 +3883,71 @@ var CSV = (function () {
     var scoreArea = el('div');
     scroll.appendChild(scoreArea);
 
-    var selected = {}; // name -> {picked, score}
+    var CUSTOM_PREFIX = '其他：';
+    function isCustom(n) { return typeof n === 'string' && n.indexOf(CUSTOM_PREFIX) === 0; }
+
+    var selected = {};  // name -> {picked, score, fromPre}
+    var customs = [];   // [{text, score}] —— 「其他」自定义项
+    var otherPicked = false;
+
+    function seed(obj, fromPre) {
+      if (!obj) return;
+      Object.keys(obj).forEach(function (k) {
+        if (isCustom(k)) {
+          customs.push({ text: k.slice(CUSTOM_PREFIX.length), score: obj[k] });
+          otherPicked = true;
+        } else {
+          selected[k] = { picked: true, score: obj[k], fromPre: !!fromPre };
+        }
+      });
+    }
+    // 本单元已有保存答案时以它为准；否则（催眠后首次进入）带入催眠前记录作为预填
     var prev = app.session.answers[unit.id];
-    if (prev && prev.selections) {
-      for (var k in prev.selections) selected[k] = { picked: true, score: prev.selections[k] };
+    if (prev && prev.selections) seed(prev.selections, false);
+    else if (unit.phase === 'post') seed(preSel, true);
+
+    function buildScoreOpts(cur, onPick) {
+      var so = el('div', 'score-opts');
+      for (var v = 0; v <= 10; v++) {
+        (function (vv) {
+          var bt = el('button', cur === vv ? 'picked' : '', String(vv));
+          bt.onclick = function () { onPick(vv); };
+          so.appendChild(bt);
+        })(v);
+      }
+      return so;
+    }
+
+    // 「其他」自定义项：文本框 + 0-10 评分
+    function buildCustomBlock() {
+      var box = el('div', 'other-box');
+      box.appendChild(el('div', 'other-t', '其他 — 请填写具体' + domName + '，并打 0–10 分（0=无 → 10=极重）'));
+      customs.forEach(function (c, i) {
+        var row = el('div', 'other-row');
+        var inp = el('input', 'other-input');
+        inp.type = 'text';
+        inp.setAttribute('type', 'text');
+        inp.placeholder = unit.domain === 'emotion' ? '例如：委屈' : '例如：手抖';
+        inp.value = c.text || '';
+        inp.oninput = function () { c.text = inp.value.trim(); };
+        row.appendChild(inp);
+        if (customs.length > 1) {
+          var del = el('button', 'other-del', '×');
+          del.setAttribute('title', '删除此项');
+          del.onclick = function () { customs.splice(i, 1); renderScores(); };
+          row.appendChild(del);
+        }
+        box.appendChild(row);
+        var srow = el('div', 'score-row');
+        srow.appendChild(el('div', 'score-name',
+          (c.text || '（未填写）') + '：' + (c.score !== undefined ? c.score + ' 分' : '请打分')));
+        srow.appendChild(buildScoreOpts(c.score, function (v) { c.score = v; renderScores(); }));
+        box.appendChild(srow);
+      });
+      var add = el('button', 'other-add', '＋ 再添加一项');
+      add.onclick = function () { customs.push({ text: '', score: undefined }); renderScores(); };
+      box.appendChild(add);
+      return box;
     }
 
     function renderScores() {
@@ -3855,21 +3955,15 @@ var CSV = (function () {
       Object.keys(selected).forEach(function (name) {
         if (!selected[name].picked) return;
         var row = el('div', 'score-row');
-        row.appendChild(el('div', 'score-name', name + '：' + (selected[name].score !== undefined ? selected[name].score + ' 分' : '请打分')));
-        var so = el('div', 'score-opts');
-        for (var v = 0; v <= 10; v++) {
-          (function (vv) {
-            var bt = el('button', selected[name].score === vv ? 'picked' : '', String(vv));
-            bt.onclick = function () {
-              selected[name].score = vv;
-              renderScores();
-            };
-            so.appendChild(bt);
-          })(v);
-        }
-        row.appendChild(so);
+        row.appendChild(el('div', 'score-name',
+          name + '：' + (selected[name].score !== undefined ? selected[name].score + ' 分' : '请打分')));
+        row.appendChild(buildScoreOpts(selected[name].score, function (v) {
+          selected[name].score = v;
+          renderScores();
+        }));
         scoreArea.appendChild(row);
       });
+      if (otherPicked) scoreArea.appendChild(buildCustomBlock());
     }
 
     // 按分组渲染（无分组配置时退化为平铺）
@@ -3880,6 +3974,17 @@ var CSV = (function () {
         if (g.name) wrap.appendChild(el('div', 'chip-group-t', g.name));
         var row = el('div', 'chips');
         g.items.forEach(function (name) {
+          if (name === '其他' || name === '其他：') {
+            var oChip = el('button', 'chip' + (otherPicked ? ' on' : ''), '其他');
+            oChip.onclick = function () {
+              otherPicked = !otherPicked;
+              if (otherPicked && !customs.length) customs.push({ text: '', score: undefined });
+              oChip.className = 'chip' + (otherPicked ? ' on' : '');
+              renderScores();
+            };
+            row.appendChild(oChip);
+            return;
+          }
           var chip = el('button', 'chip' + (selected[name] && selected[name].picked ? ' on' : ''), name);
           chip.onclick = function () {
             if (!selected[name]) selected[name] = { picked: false };
@@ -3901,6 +4006,12 @@ var CSV = (function () {
       Object.keys(selected).forEach(function (name) {
         if (selected[name].picked && selected[name].score !== undefined) sel[name] = selected[name].score;
       });
+      if (otherPicked) {
+        customs.forEach(function (c) {
+          var t = (c.text || '').trim();
+          if (t && c.score !== undefined) sel[CUSTOM_PREFIX + t] = c.score;
+        });
+      }
       return sel;
     }
 
